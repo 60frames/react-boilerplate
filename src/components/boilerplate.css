@@ -1,0 +1,15 @@
+.title {
+    font-size: 30px;
+}
+
+.description {
+    font-size: 15px;
+    color: #666666;
+}
+
+.logo {
+	height: 100px;
+	width: 100px;
+	background-image: url('assets/img/react-logo.png');
+	background-size: cover;
+}
