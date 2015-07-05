@@ -1,5 +1,5 @@
-var React = require('react'),
-    Boilerplate = require('./components/boilerplate');
+import React from 'react';
+import Boilerplate from './components/boilerplate';
 
 React.render(
     <Boilerplate/>,

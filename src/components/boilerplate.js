@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 var Boilerplate = React.createClass({
     render: function() {
@@ -8,4 +8,4 @@ var Boilerplate = React.createClass({
     }
 });
 
-module.exports = Boilerplate;
+export default Boilerplate;
