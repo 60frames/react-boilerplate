@@ -1,7 +1,8 @@
-var webpack = require('webpack'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    config = require('./webpack.config.js'),
-    path = require('path');
+'use strict';
+
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var config = require('./webpack.config.js');
 
 delete config.defaultConfig.devtool;
 delete config.defaultConfig.debug;

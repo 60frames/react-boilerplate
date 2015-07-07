@@ -1,13 +1,15 @@
-var StatsPlugin = require('stats-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    path = require('path'),
-    clone = require('clone');
+'use strict';
+
+var StatsPlugin = require('stats-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path');
+var clone = require('clone');
 
 var defaultConfig = {
     debug: true,
     devtool: 'source-map',
     context: path.join(__dirname, 'src'),
-    entry:  './entry.js',
+    entry: './entry.js',
     target: 'web',
     output: {
         path: path.join(__dirname, 'dist'),
@@ -62,11 +64,11 @@ var defaultConfig = {
  * @param  {Object} obj The object to convert
  * @return {Array}      The resulting array mapped from obj
  */
-var map = function(obj) {
+function map(obj) {
     return Object.keys(obj).map(function(k) {
         return obj[k];
     });
-};
+}
 
 /**
  * Converts a modified Webpack config into a Webpack compatible
@@ -74,12 +76,12 @@ var map = function(obj) {
  * @param  {Object} config A `modified` Webpack config
  * @return {Object}        A Webpack compatible config
  */
-var convert = function(config) {
+function convert(config) {
     config = clone(config);
     config.plugins = map(config.plugins);
     config.module.loaders = map(config.module.loaders);
     return config;
-};
+}
 
 // The default exports is a converted and Webpack ready
 // `webpack.default.config.js`.
