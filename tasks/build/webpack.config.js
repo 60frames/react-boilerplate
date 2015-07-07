@@ -4,20 +4,22 @@ var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 var clone = require('clone');
+var srcDir = path.join(__dirname, '../../src');
+var distDir = path.join(__dirname, '../../dist');
 
 var defaultConfig = {
     debug: true,
     devtool: 'source-map',
-    context: path.join(__dirname, 'src'),
+    context: srcDir,
     entry: './entry.js',
     target: 'web',
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: distDir,
         filename: 'entry.js'
     },
     resolve: {
         root: [
-            path.join(__dirname, 'src')
+            srcDir
         ]
     },
     module: {
@@ -50,7 +52,7 @@ var defaultConfig = {
         // Plugins are usually an array but instead we are using
         // an object so we can override easily in other Webpack
         // configurations.
-        stats: new StatsPlugin(path.join(__dirname, 'dist', 'stats.json'), {
+        stats: new StatsPlugin(path.join(distDir, 'stats.json'), {
             chunkModules: true
         }),
         extract: new ExtractTextPlugin('[name].css', {
