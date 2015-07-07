@@ -1,9 +1,16 @@
 import React from 'react';
+import style from './boilerplate.css';
 
 var Boilerplate = React.createClass({
     render: function() {
         return (
-            <h1>react-boilerplate</h1>
+            <div>
+                <h1 className={style.title}>react-boilerplate</h1>
+                <p className={style.description}>
+                    A React and Webpack boilerplate.
+                </p>
+                <div className={style.logo}></div>
+            </div>
         );
     }
 });
