@@ -8,8 +8,8 @@
 }
 
 .logo {
-	height: 100px;
-	width: 100px;
-	background-image: url('assets/img/react-logo.png');
-	background-size: cover;
+    height: 100px;
+    width: 100px;
+    background-image: url('assets/img/react-logo.png');
+    background-size: cover;
 }

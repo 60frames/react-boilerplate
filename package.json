@@ -5,7 +5,7 @@
   "private": true,
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,9 @@
     "name": "60frames",
     "email": "devs@60fram.es",
     "url": "http://60fram.es"
+  },
+  "engines": {
+    "node": "0.10.x"
   },
   "contributors": [
     {
@@ -42,9 +45,20 @@
   "dependencies": {
     "react": "^0.13.3"
   },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ],
+    "testDirectoryName": "src",
+    "testFileExtensions": [
+      "test.js"
+    ]
+  },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
     "babel-core": "^5.6.15",
+    "babel-jest": "^5.3.0",
     "babel-loader": "^5.3.1",
     "clone": "^1.0.2",
     "coding-standards": "git@github.com:60frames/coding-standards.git#1.0.2",
@@ -53,6 +67,7 @@
     "eslint-plugin-react": "^2.6.4",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
+    "jest-cli": "0.4.15",
     "stats-webpack-plugin": "^0.1.2",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
