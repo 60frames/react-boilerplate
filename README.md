@@ -4,4 +4,4 @@
 - `npm install`
 - `gulp --tasks-simple`
 - `gulp build`
-- `gulp build --env=prod`
+- `gulp build --release --watch` (watch can also be a number to set Webpacks aggregateTimeout)
