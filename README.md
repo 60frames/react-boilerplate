@@ -1,5 +1,7 @@
 #react-boilerplate
 
+- `npm install -g git+ssh://git@github.com:gulpjs/gulp.git#4.0`
 - `npm install`
-- `webpack --config=webpack.config.js`
-- `webpack --config=webpack.release.config.js`
+- `gulp --tasks-simple`
+- `gulp build`
+- `gulp build --env=prod`
