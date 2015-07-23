@@ -2,7 +2,7 @@
 
 // Default args used by two or more tasks.
 require('yargs')
-    .default('env', 'dev');
+    .default('release', false);
 
 require('./tasks/lint');
 require('./tasks/build/build');

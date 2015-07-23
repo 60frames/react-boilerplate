@@ -1,14 +1,14 @@
 'use strict';
 
 var gulp = require('gulp');
-var args = require('yargs').argv;
-var exec = require('child_process').exec;
+var gutil = require('gulp-util');
 var del = require('del');
+var webpack = require('webpack');
+var args = require('yargs')
+    .default('watch', false)
+    .argv;
 
-var CONFIGS = {
-    dev: './tasks/build/webpack.config.js',
-    prod: './tasks/build/webpack.release.config.js'
-};
+args.watch = args.watch === true ? 300 : args.watch;
 
 /**
  * Deletes the contents of the dist directory.
@@ -19,14 +19,50 @@ function clean(done) {
     del('dist/**', done);
 }
 
-// TODO: switch out for webpack node api.
+/**
+ * Builds the application by running an
+ * environment config through Webpack.
+ * @param  {Function} done callback
+ * @return {undefined}     undefined
+ */
 function build(done) {
-    var cmd = 'webpack --config=' + CONFIGS[args.env];
-    exec(cmd, function(error, stdout, stderr) {
-        console.log(error);
-        console.log(stdout);
-        console.log(stderr);
+    var config = require(args.release ? './webpack.release.config.js' : './webpack.config.js');
+    var compiler = webpack(config);
+    var watcher;
+
+    /**
+     * Webpacks complete callback
+     * @param  {Object} err   Webpacks error object
+     * @param  {Object} stats Webpacks build statistics
+     * @return {undefined}    undefined
+     */
+    function webpackCallback(err, stats) {
+        if (err) {
+            throw new gutil.PluginError('webpack:build', err);
+        }
+        gutil.log(stats.toString({
+            colors: true
+        }));
         done();
+
+        if (args.watch) {
+            gutil.log(gutil.colors.cyan('Watching for changes with a ' +
+                args.watch + 'ms timeout.'));
+        }
+    }
+
+    if (args.watch) {
+        watcher = compiler.watch(args.watch, webpackCallback);
+    } else {
+        compiler.run(webpackCallback);
+    }
+
+    process.on('SIGINT', function() {
+        if (args.watch) {
+            watcher.close(function() {
+                gutil.log(gutil.colors.red('Stopped watching.'));
+            });
+        }
     });
 }
 
