@@ -4,11 +4,10 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var del = require('del');
 var webpack = require('webpack');
-var args = require('yargs')
-    .default('watch', false)
-    .argv;
+var args = require('yargs').argv;
 
-args.watch = args.watch === true ? 300 : args.watch;
+var watch = 'watch' in args;
+var watchTimeout = typeof args.watch === 'number' ? args.watch : 300;
 
 /**
  * Deletes the contents of the dist directory.
@@ -45,20 +44,20 @@ function build(done) {
         }));
         done();
 
-        if (args.watch) {
+        if (watch) {
             gutil.log(gutil.colors.cyan('Watching for changes with a ' +
-                args.watch + 'ms timeout.'));
+                watchTimeout + 'ms timeout.'));
         }
     }
 
-    if (args.watch) {
-        watcher = compiler.watch(args.watch, webpackCallback);
+    if (watch) {
+        watcher = compiler.watch(watchTimeout, webpackCallback);
     } else {
         compiler.run(webpackCallback);
     }
 
     process.on('SIGINT', function() {
-        if (args.watch) {
+        if (watch) {
             watcher.close(function() {
                 gutil.log(gutil.colors.red('Stopped watching.'));
             });
