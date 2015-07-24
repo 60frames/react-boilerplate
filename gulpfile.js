@@ -2,7 +2,8 @@
 
 // Default args used by two or more tasks.
 require('yargs')
-    .default('release', false);
+    .default('env', 'dev');
 
 require('./tasks/lint');
+require('./tasks/editorconfig');
 require('./tasks/build/build');
