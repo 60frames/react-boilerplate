@@ -7,3 +7,4 @@ require('yargs')
 require('./tasks/lint');
 require('./tasks/editorconfig');
 require('./tasks/build/build');
+require('./tasks/serve');

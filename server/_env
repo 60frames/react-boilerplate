@@ -1,0 +1,18 @@
+# This file documents possible server configuration without
+# the risk of checking sensitive variables into the repository.
+# Rename it to `.env` and then feel free to add sensitive values as `.env` is
+# in the `.gitignore`.
+
+# The environment
+NODE_ENV=development
+
+# Show debugger output in terminal
+# https://github.com/visionmedia/debug#wildcards
+DEBUG=app
+
+# Server listening port
+PORT=6060
+
+# Any valid ms value
+# https://github.com/rauchg/ms.js
+BROWSER_CACHE=0
