@@ -44,7 +44,10 @@ var defaultConfig = {
             babel: {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel'
+                loader: 'babel',
+                query: {
+                    optional: ['runtime']
+                }
             }
         }
     },
