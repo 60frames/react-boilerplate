@@ -37,7 +37,7 @@ function build(done) {
      */
     function webpackCallback(err, stats) {
         if (err) {
-            throw new gutil.PluginError('webpack:build', err);
+            throw new gutil.PluginError('build', err);
         }
         gutil.log(stats.toString({
             colors: true
