@@ -1,8 +1,9 @@
 import React from 'react';
 import style from './boilerplate.css';
 
-var Boilerplate = React.createClass({
-    render: function() {
+let Boilerplate = React.createClass({
+
+    render() {
         return (
             <div>
                 <h1 className={style.title}>react-boilerplate</h1>
@@ -14,6 +15,7 @@ var Boilerplate = React.createClass({
             </div>
         );
     }
+
 });
 
 export default Boilerplate;

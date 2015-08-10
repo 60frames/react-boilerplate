@@ -40,6 +40,7 @@
   },
   "homepage": "https://github.com/60frames/react-boilerplate",
   "dependencies": {
+    "andlog": "git+ssh://git@github.com:60frames/andlog.git#v1.0.1",
     "colors": "^1.1.2",
     "compression": "^1.5.1",
     "debug": "^2.2.0",
@@ -61,6 +62,7 @@
     "del": "^1.2.0",
     "eslint": "^0.24.0",
     "eslint-plugin-react": "^2.6.4",
+    "expose-loader": "^0.7.0",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "gulp": "git+ssh://git@github.com:gulpjs/gulp.git#4.0",
@@ -69,6 +71,7 @@
     "simple-define-webpack-plugin": "git+ssh://git@github.com:richardscarrott/simple-define-webpack-plugin.git#master",
     "stats-webpack-plugin": "^0.1.2",
     "strip-json-comments": "^1.0.4",
+    "strip-loader": "^0.1.0",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
     "webpack": "^1.10.1",

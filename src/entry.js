@@ -1,7 +1,7 @@
+import logger from 'andlog';
 import React from 'react';
 import Boilerplate from './components/boilerplate';
 
-React.render(
-    <Boilerplate />,
-    document.getElementById('content')
-);
+logger.info('App started...');
+
+React.render(<Boilerplate />, document.getElementById('content'));
