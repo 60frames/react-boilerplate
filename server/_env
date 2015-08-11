@@ -16,3 +16,8 @@ PORT=6060
 # Any valid ms value
 # https://github.com/rauchg/ms.js
 BROWSER_CACHE=0
+
+# Whether to use livereload middleware to use alongside
+# the `gulp build --livereload`. This can also be forced
+# when running `gulp serve --livereload`.
+# LIVERELOAD=true
