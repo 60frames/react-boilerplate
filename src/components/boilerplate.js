@@ -7,7 +7,8 @@ var Boilerplate = React.createClass({
             <div>
                 <h1 className={style.title}>react-boilerplate</h1>
                 <p className={style.description}>
-                    A React and Webpack boilerplate.
+                    A React and Webpack boilerplate.<br />
+                    Environment: {window.env.BROWSER_ENV}
                 </p>
                 <div className={style.logo}></div>
             </div>

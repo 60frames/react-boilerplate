@@ -2,12 +2,28 @@
 
 var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var SimpleDefinePlugin = require('simple-define-webpack-plugin');
 var path = require('path');
 var clone = require('clone');
+var args = require('yargs').argv;
+var stripJsonComments = require('strip-json-comments');
+var fs = require('fs');
+var gutil = require('gulp-util');
+
 var srcDir = path.join(__dirname, '../../src');
 var distDir = path.join(__dirname, '../../dist');
+var envConfigPath = path.join(srcDir, 'env/' + args.env + '.json');
+var envConfig;
+var defaultConfig;
 
-var defaultConfig = {
+try {
+    envConfig = JSON.parse(stripJsonComments(fs.readFileSync(envConfigPath, 'utf8')));
+} catch (e) {
+    e.message = 'Cannot read env file: ' + envConfigPath + '\nError: ' + e.message;
+    throw new gutil.PluginError('build', e);
+}
+
+defaultConfig = {
     debug: true,
     devtool: 'source-map',
     context: srcDir,
@@ -60,6 +76,9 @@ var defaultConfig = {
         }),
         extract: new ExtractTextPlugin('[name].css', {
             allChunks: true
+        }),
+        environment: new SimpleDefinePlugin({
+            'window.env': envConfig
         })
     }
 };
