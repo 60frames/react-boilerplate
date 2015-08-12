@@ -1,0 +1,17 @@
+.title {
+    font-size: 30px;
+}
+
+.navSet {
+    composes: clearfix from 'assets/css/clearfix.css';
+    /* TODO: Include reset CSS and load it globally */
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.navItem {
+    /* TODO: Include reset CSS and load it globally */
+    list-style: none;
+    float: left;
+    margin-right: 10px;
+}

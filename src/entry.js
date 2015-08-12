@@ -1,7 +1,7 @@
 import React from 'react';
-import Boilerplate from './components/boilerplate';
+import routes from './routes';
+import Router from 'react-router';
 
-React.render(
-    <Boilerplate />,
-    document.getElementById('content')
-);
+Router.run(routes, Router.HistoryLocation, function(Handler) {
+    React.render(<Handler/>, document.getElementById('content'));
+});
