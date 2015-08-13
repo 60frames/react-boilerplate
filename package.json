@@ -57,7 +57,7 @@
     "babel-loader": "^5.3.1",
     "babel-runtime": "^5.8.20",
     "clone": "^1.0.2",
-    "coding-standards": "git+ssh://git@github.com:60frames/coding-standards.git#1.0.4",
+    "coding-standards": "git+ssh://git@github.com:60frames/coding-standards.git#1.0.5",
     "css-loader": "^0.15.1",
     "del": "^1.2.0",
     "eslint": "^0.24.0",
