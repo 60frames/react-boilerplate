@@ -1,7 +1,10 @@
 import logger from 'andlog';
 import React from 'react';
-import Boilerplate from './components/boilerplate';
+import Router from 'react-router';
+import routes from './routes';
 
 logger.info('App started...');
 
-React.render(<Boilerplate />, document.getElementById('content'));
+Router.run(routes, Router.HistoryLocation, function(Handler) {
+    React.render(<Handler/>, document.getElementById('content'));
+});
