@@ -19,6 +19,25 @@ function clean(done) {
 }
 
 /**
+ * Copies files in `src` to `dist` directory.
+ * @return {Stream} File stream.
+ */
+function copy() {
+    return gulp.src([
+            // Filenames in `src`
+            'favicon.ico',
+            'apple-touch-icon.png',
+            'browserconfig.xml',
+            'robots.txt',
+            'tile-wide.png',
+            'tile.png'
+        ], {
+            cwd: 'src'
+        })
+        .pipe(gulp.dest('dist/'));
+}
+
+/**
  * Builds the application by running an
  * environment config through Webpack.
  * @param  {Function} done callback
@@ -65,4 +84,9 @@ function build(done) {
     });
 }
 
-gulp.task('build', gulp.series(clean, build));
+gulp.task('build', gulp.series(
+    clean,
+    gulp.parallel(
+        build, copy
+    )
+));
