@@ -43,17 +43,28 @@ defaultConfig = {
             // Loaders are usually an array but instead we are using
             // an object so we can override easily in other Webpack
             // configurations.
-            extract: {
+            localCss: {
                 test: /\.css$/,
+                exclude: /node_modules/,
                 loader: ExtractTextPlugin.extract(
                     'style',
                     'css?modules&localIdentName=[name]-[local]_[hash:base64:5]!autoprefixer'
                 )
             },
+            // We make the assumption that all CSS in node_modules is either
+            // regular 'global' css or pre-compiled.
+            globalCss: {
+                test: /\.css$/,
+                include: /node_modules/,
+                loader: ExtractTextPlugin.extract(
+                    'style',
+                    'css'
+                )
+            },
             fileLoader: {
                 test: /\.(jpe?g|png|gif|svg|woff|ttf|eot)$/i,
                 // Files under 10kb will become a DataUrl.
-                // Anything more then this should probabaly be downloaded and
+                // Anything more then this should probably be downloaded and
                 // cached as its own file.
                 loader: 'url?limit=10000'
             },

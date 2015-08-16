@@ -17,7 +17,7 @@ config.defaultConfig.plugins.define = new webpack.DefinePlugin({
     }
 });
 
-config.defaultConfig.module.loaders.extract.loader = ExtractTextPlugin.extract(
+config.defaultConfig.module.loaders.localCss.loader = ExtractTextPlugin.extract(
     'style',
     'css?modules&localIdentName=[hash:base64:5]!autoprefixer'
 );
