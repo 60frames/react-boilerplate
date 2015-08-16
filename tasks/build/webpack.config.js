@@ -64,6 +64,11 @@ defaultConfig = {
                 query: {
                     optional: ['runtime']
                 }
+            },
+            // Expose 'react' to support React Developer Tools in Chrome.
+            exposeReact: {
+                test: require.resolve('react'),
+                loader: 'expose?React'
             }
         }
     },
