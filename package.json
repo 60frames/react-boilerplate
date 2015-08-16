@@ -43,6 +43,7 @@
     "andlog": "git+ssh://git@github.com:60frames/andlog.git#v1.0.1",
     "colors": "^1.1.2",
     "compression": "^1.5.1",
+    "css-reset": "git+ssh://git@github.com:60frames/css-reset.git#1.0.0",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",
     "express": "^4.13.1",
