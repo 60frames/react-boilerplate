@@ -5,7 +5,14 @@
   "private": true,
   "main": "",
   "scripts": {
+    "lint": "gulp lint",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pre-commit": {
+    "silent": true,
+    "run": [
+      "lint"
+    ]
   },
   "repository": {
     "type": "git",
@@ -67,6 +74,7 @@
     "gulp": "git+ssh://git@github.com:gulpjs/gulp.git#4.0",
     "gulp-eslint": "^0.15.0",
     "gulp-util": "^3.0.6",
+    "pre-commit": "^1.1.1",
     "simple-define-webpack-plugin": "git+ssh://git@github.com:richardscarrott/simple-define-webpack-plugin.git#master",
     "stats-webpack-plugin": "^0.1.2",
     "strip-json-comments": "^1.0.4",
