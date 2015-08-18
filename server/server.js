@@ -9,6 +9,7 @@ var ms = require('ms');
 var compression = require('compression');
 var morgan = require('morgan');
 var fs = require('fs');
+var livereload = require('connect-livereload');
 var debug = require('debug')('app');
 var colors = require('colors/safe');
 var app = express();
@@ -21,6 +22,11 @@ app.set('port', config.PORT || 6060);
 /**
  * Middleware
  */
+if (config.LIVERELOAD) {
+    debug('Livereload middleware active');
+    app.use(livereload());
+}
+
 app.use(compression());
 
 app.use(express.static(path.join(__dirname, '../dist'), {
@@ -49,10 +55,4 @@ app.listen(app.get('port'), function() {
     debug(colors.cyan('Server started: ') +
         'http://localhost:' + app.get('port'));
     debug(colors.grey('Press \'ctrl + c\' to terminate server'));
-});
-
-process.on('SIGINT', function() {
-    /* eslint-disable no-process-exit */
-    debug(colors.red('Server killed'));
-    process.exit(0);
 });

@@ -2,12 +2,15 @@
 
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var livereload = require('gulp-livereload');
 var del = require('del');
 var webpack = require('webpack');
-var args = require('yargs').argv;
+var args = require('yargs')
+    .argv;
 
-var watch = 'watch' in args;
-var watchTimeout = typeof args.watch === 'number' ? args.watch : 300;
+var watch = 'watch' in args || 'livereload' in args;
+var watchTimeout = args.watch || args.livereload;
+watchTimeout = typeof watchTimeout === 'number' ? watchTimeout : 300;
 
 /**
  * Deletes the contents of the dist directory.
@@ -46,7 +49,7 @@ function copy() {
 function build(done) {
     var config = require(args.release ? './webpack.release.config.js' : './webpack.config.js');
     var compiler = webpack(config);
-    var watcher;
+    var callbackCount = 0;
 
     /**
      * Webpacks complete callback
@@ -55,33 +58,54 @@ function build(done) {
      * @return {undefined}    undefined
      */
     function webpackCallback(err, stats) {
+        var jsonStats = stats.toJson();
+
         if (err) {
             throw new gutil.PluginError('build', err);
         }
-        gutil.log(stats.toString({
-            colors: true
-        }));
+
         done();
 
-        if (watch) {
-            gutil.log(gutil.colors.cyan('Watching for changes with a ' +
-                watchTimeout + 'ms timeout.'));
+        if (!callbackCount) {
+            // This runs on first build only.
+            gutil.log(stats.toString({
+                colors: true
+            }));
+            if (watch) {
+                if (args.livereload) {
+                    livereload.listen();
+                    gutil.log(gutil.colors.cyan('Live reload server started.'));
+                }
+                gutil.log(gutil.colors.cyan('Watching for changes with a ' +
+                    watchTimeout + 'ms timeout.'));
+            }
+        } else {
+            // This runs after the first build when `--watch`ing
+            jsonStats.errors.forEach(function(e) {
+                gutil.log(gutil.colors.red(e));
+            });
+
+            jsonStats.warnings.forEach(function(e) {
+                gutil.log(gutil.colors.yellow(e));
+            });
+
+            if (!jsonStats.errors.length && !jsonStats.warnings.length) {
+                gutil.log(gutil.colors.grey('File changed succesfully.'));
+                if (livereload.server) {
+                    // Live reload only if no errors or warnings in build
+                    livereload.changed('app');
+                }
+            }
         }
+
+        callbackCount++;
     }
 
     if (watch) {
-        watcher = compiler.watch(watchTimeout, webpackCallback);
+        compiler.watch(watchTimeout, webpackCallback);
     } else {
         compiler.run(webpackCallback);
     }
-
-    process.on('SIGINT', function() {
-        if (watch) {
-            watcher.close(function() {
-                gutil.log(gutil.colors.red('Stopped watching.'));
-            });
-        }
-    });
 }
 
 gulp.task('build', gulp.series(
