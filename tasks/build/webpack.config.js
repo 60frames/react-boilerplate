@@ -5,17 +5,17 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 var clone = require('clone');
 var srcDir = path.join(__dirname, '../../src');
-var distDir = path.join(__dirname, '../../dist');
+var distDir = path.join(__dirname, '../../__tests__');
 
 var defaultConfig = {
     debug: true,
     devtool: 'source-map',
     context: srcDir,
-    entry: './entry.js',
+    entry: './components/boilerplate.test.js',
     target: 'web',
     output: {
         path: distDir,
-        filename: 'entry.js'
+        filename: 'entry.test.js'
     },
     resolve: {
         root: [

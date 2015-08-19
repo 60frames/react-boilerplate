@@ -7,27 +7,41 @@ jest.mock('./boilerplate.css');
 // Cannot use ES6 imports as they are hoisted above `jest.dontMock`
 // https://github.com/babel/babel-jest/issues/16
 var Boilerplate = require('./boilerplate.js');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+// var React = require('react/addons');
+// var TestUtils = React.addons.TestUtils;
+
+// describe('boilerplate', function() {
+
+//     var component;
+
+//     beforeEach(function() {
+//         component = TestUtils.renderIntoDocument(
+//             <Boilerplate />
+//         );
+//     });
+
+//     it('has a h1 title', function() {
+//         var title = TestUtils.findRenderedDOMComponentWithTag(component, 'h1');
+//         expect(title.getDOMNode().textContent).toEqual('react-boilerplate');
+//     });
+
+//     it('has a paragraph with descriptive text', function() {
+//         var paragraph = TestUtils.findRenderedDOMComponentWithTag(component, 'p');
+//         expect(paragraph.getDOMNode().textContent).toEqual('A React and Webpack boilerplate.');
+//     });
+
+// });
 
 describe('boilerplate', function() {
 
-    var component;
+    var instance;
 
     beforeEach(function() {
-        component = TestUtils.renderIntoDocument(
-            <Boilerplate />
-        );
+        instance = new Boilerplate();
     });
 
-    it('has a h1 title', function() {
-        var title = TestUtils.findRenderedDOMComponentWithTag(component, 'h1');
-        expect(title.getDOMNode().textContent).toEqual('react-boilerplate');
-    });
-
-    it('has a paragraph with descriptive text', function() {
-        var paragraph = TestUtils.findRenderedDOMComponentWithTag(component, 'p');
-        expect(paragraph.getDOMNode().textContent).toEqual('A React and Webpack boilerplate.');
+    it('sums', function() {
+        expect(instance.sum(1, 3)).toBe(4);
     });
 
 });
