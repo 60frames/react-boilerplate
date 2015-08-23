@@ -34,6 +34,9 @@ defaultConfig = {
         filename: 'entry.js'
     },
     resolve: {
+        alias: {
+            modernizr: path.join(__dirname, '../../dist/modernizr.js')
+        },
         root: [
             srcDir
         ]
@@ -80,6 +83,10 @@ defaultConfig = {
             exposeReact: {
                 test: require.resolve('react'),
                 loader: 'expose?React'
+            },
+            modernizr: {
+                test: /modernizr.js$/,
+                loader: 'exports?window.Modernizr'
             }
         }
     },
