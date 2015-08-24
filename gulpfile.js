@@ -8,3 +8,4 @@ require('./tasks/lint');
 require('./tasks/editorconfig');
 require('./tasks/build/build');
 require('./tasks/serve');
+require('./tasks/test/test');

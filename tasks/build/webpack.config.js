@@ -48,7 +48,8 @@ defaultConfig = {
                 exclude: /node_modules/,
                 loader: ExtractTextPlugin.extract(
                     'style',
-                    'css?modules&localIdentName=[name]-[local]_[hash:base64:5]!autoprefixer'
+                    'css?modules&localIdentName=[name]-[local]_[hash:base64:5]',
+                    'autoprefixer'
                 )
             },
             // We make the assumption that all CSS in node_modules is either
@@ -71,10 +72,7 @@ defaultConfig = {
             babel: {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel',
-                query: {
-                    optional: ['runtime']
-                }
+                loader: 'babel?optional[]=runtime'
             },
             // Expose 'react' to support React Developer Tools in Chrome.
             exposeReact: {
