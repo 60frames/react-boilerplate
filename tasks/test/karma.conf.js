@@ -63,14 +63,18 @@ module.exports = function(config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+        // TODO: should we provide a argument to choose the browser as I can imagine
+        // phantom being best for tdd / ci but chrome being better if you need to
+        // debug?
         browsers: [
             'Chrome'
+            // 'PhantomJS' // TODO
         ],
 
         // have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
-        phantomjsLauncher: {
-            exitOnResourceError: true
-        },
+        // phantomjsLauncher: {
+        //     exitOnResourceError: true
+        // },
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
@@ -80,7 +84,8 @@ module.exports = function(config) {
             require('karma-webpack'),
             require('karma-sourcemap-loader'),
             require('karma-jasmine'),
-            require('karma-chrome-launcher')
+            require('karma-chrome-launcher'),
+            require('karma-phantomjs-launcher')
         ]
 
     });

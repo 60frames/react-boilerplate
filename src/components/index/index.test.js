@@ -7,7 +7,7 @@ let TestUtils = React.addons.TestUtils;
 
 describe('components/index/index', () => {
 
-    var component;
+    let component;
 
     beforeEach(() => {
         component = TestUtils.renderIntoDocument(
@@ -23,6 +23,11 @@ describe('components/index/index', () => {
     it('has a logo', () => {
         let logo = TestUtils.findRenderedDOMComponentWithClass(component, 'logo');
         expect(logo).toBeDefined();
+    });
+
+    it('has a second logo', function() {
+        let logo = TestUtils.findRenderedDOMComponentWithTag(component, 'img');
+        expect(logo.getDOMNode().src).toContain('react-logo.png');
     });
 
     describe('test isolation', () => {
