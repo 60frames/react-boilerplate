@@ -23,12 +23,11 @@ describe('components/four04/four04', () => {
     it('has a paragraph with descriptive text', () => {
         let paragraph = TestUtils.findRenderedDOMComponentWithClass(component, 'text');
         expect(paragraph.getDOMNode().textContent).toEqual('Oops, looks like this does not exist.');
-
     });
 
     describe('test isolation', () => {
 
-        it('can break React.addons without affecting other test files', function() {
+        it('can break React.addons without affecting other test files', () => {
             expect(React.addons).toBeDefined();
             delete React.addons;
             expect(React.addons).toBeUndefined();
