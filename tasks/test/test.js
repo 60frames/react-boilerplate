@@ -3,11 +3,12 @@
 var gulp = require('gulp');
 var Server = require('karma').Server;
 var path = require('path');
+var modernize = require('../modernize');
 
 /**
  * Starts up the Karma server.
- * @param  {Function} done Callback.
- * @return {Undefined}     Undefined.
+ * @param  {function} done Callback.
+ * @return {undefined}     Undefined.
  */
 function test(done) {
     new Server({
@@ -15,4 +16,4 @@ function test(done) {
     }, done).start();
 }
 
-gulp.task('test', test);
+gulp.task('test', gulp.series(modernize, test));

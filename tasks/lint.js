@@ -5,7 +5,7 @@ var eslint = require('gulp-eslint');
 
 /**
  * Runs eslint.
- * @return {Stream} File stream.
+ * @return {stream} File stream.
  */
 function lint() {
     return gulp.src(['**/*.js', '!node_modules/**'])

@@ -17,7 +17,7 @@ describe('components/index/index', () => {
 
     it('has a description', () => {
         let description = TestUtils.findRenderedDOMComponentWithClass(component, 'description');
-        expect(description.getDOMNode().textContent).toBe('A React and Webpack boilerplate.Environment: development');
+        expect(description.getDOMNode().textContent).toBe('A React and Webpack boilerplate.Environment: developmentGeolocation:  is supported :)');
     });
 
     it('has a logo', () => {

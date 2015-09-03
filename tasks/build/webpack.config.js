@@ -104,9 +104,9 @@ defaultConfig = {
 };
 
 /**
- * Maps an object into an array
- * @param  {Object} obj The object to convert
- * @return {Array}      The resulting array mapped from obj
+ * Maps an object into an array.
+ * @param  {object} obj The object to convert.
+ * @return {array}      The resulting array mapped from obj.
  */
 function map(obj) {
     return Object.keys(obj).map(function(k) {
@@ -117,8 +117,8 @@ function map(obj) {
 /**
  * Converts a modified Webpack config into a Webpack compatible
  * one by mapping `loaders` and `plugins` into arrays.
- * @param  {Object} config A `modified` Webpack config
- * @return {Object}        A Webpack compatible config
+ * @param  {object} config A `modified` Webpack config.
+ * @return {object}        A Webpack compatible config.
  */
 function convert(config) {
     config = clone(config);
