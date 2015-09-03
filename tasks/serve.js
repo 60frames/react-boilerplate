@@ -9,7 +9,7 @@ var args = require('yargs').argv;
 
 /**
  * Starts the server.
- * @return {undefined} undefined
+ * @return {undefined} Undefined.
  */
 function serve() {
     var env = {};

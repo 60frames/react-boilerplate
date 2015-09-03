@@ -4,7 +4,7 @@ var gulp = require('gulp');
 
 /**
  * Copies `.editorconfig` from the 'coding-standards' module.
- * @return {Stream} File stream.
+ * @return {stream} File stream.
  */
 function copy() {
     return gulp.src('node_modules/coding-standards/.editorconfig')

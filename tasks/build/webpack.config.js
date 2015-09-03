@@ -64,20 +64,17 @@ defaultConfig = {
                     'css'
                 )
             },
-            fileLoader: {
+            files: {
                 test: /\.(jpe?g|png|gif|svg|woff|ttf|eot)$/i,
                 // Files under 10kb will become a DataUrl.
                 // Anything more then this should probably be downloaded and
                 // cached as its own file.
                 loader: 'url?limit=10000'
             },
-            babel: {
+            js: {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel',
-                query: {
-                    optional: ['runtime']
-                }
+                loader: 'babel?optional[]=runtime'
             },
             // Expose 'react' to support React Developer Tools in Chrome.
             exposeReact: {
@@ -97,19 +94,19 @@ defaultConfig = {
         stats: new StatsPlugin(path.join(distDir, 'stats.json'), {
             chunkModules: true
         }),
-        extract: new ExtractTextPlugin('[name].css', {
+        extractCss: new ExtractTextPlugin('[name].css', {
             allChunks: true
         }),
-        environment: new SimpleDefinePlugin({
+        env: new SimpleDefinePlugin({
             'window.env': envConfig
         })
     }
 };
 
 /**
- * Maps an object into an array
- * @param  {Object} obj The object to convert
- * @return {Array}      The resulting array mapped from obj
+ * Maps an object into an array.
+ * @param  {object} obj The object to convert.
+ * @return {array}      The resulting array mapped from obj.
  */
 function map(obj) {
     return Object.keys(obj).map(function(k) {
@@ -120,8 +117,8 @@ function map(obj) {
 /**
  * Converts a modified Webpack config into a Webpack compatible
  * one by mapping `loaders` and `plugins` into arrays.
- * @param  {Object} config A `modified` Webpack config
- * @return {Object}        A Webpack compatible config
+ * @param  {object} config A `modified` Webpack config.
+ * @return {object}        A Webpack compatible config.
  */
 function convert(config) {
     config = clone(config);

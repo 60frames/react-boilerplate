@@ -1,6 +1,7 @@
 import React from 'react';
-import style from './index.css';
 import Modernizr from 'modernizr';
+import style from './index.css';
+import reactLogo from '../../assets/img/react-logo.png';
 
 let Index = React.createClass({
 
@@ -15,6 +16,7 @@ let Index = React.createClass({
                     Geolocation: {geoStr}
                 </p>
                 <div className={style.logo}></div>
+                <img src={reactLogo} />
             </div>
         );
     }

@@ -3,12 +3,10 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var livereload = require('gulp-livereload');
-var modernizr = require('gulp-modernizr');
 var del = require('del');
 var webpack = require('webpack');
-var args = require('yargs')
-    .argv;
-var modernizrAllConfig = require('modernizr/lib/config-all.json');
+var args = require('yargs').argv;
+var modernize = require('../modernize');
 
 var watch = 'watch' in args || 'livereload' in args;
 var watchTimeout = args.watch || args.livereload;
@@ -16,44 +14,16 @@ watchTimeout = typeof watchTimeout === 'number' ? watchTimeout : 300;
 
 /**
  * Deletes the contents of the dist directory.
- * @param  {Function} done callback.
- * @return {undefined}     undefined.
+ * @param  {function} done Callback.
+ * @return {undefined}     Undefined.
  */
 function clean(done) {
     del('dist/**', done);
 }
 
 /**
- * Modernizr build
- * @return {undefined}    undefined.
- */
-function modernize() {
-    var options = {
-        // Modernizr config will only include tests it needs.
-        // All Modernizr tests are overidden below when developing.
-        // https://github.com/doctyper/customizr
-        options: [
-            'setClasses'
-        ]
-    };
-
-    if (!args.release) {
-        // All the tests!
-        options.tests = modernizrAllConfig['feature-detects'];
-        // TODO: Ideally we would include all the `options` as well
-        // but there is an issue with html5shiv.
-        // https://github.com/Modernizr/Modernizr/issues/1431
-        // options.options = modernizrAllConfig.options;
-    }
-
-    return gulp.src(['./src/**/*.{js,css}'])
-        .pipe(modernizr(options))
-        .pipe(gulp.dest('dist'));
-}
-
-/**
  * Copies files in `src` to `dist` directory.
- * @return {Stream} File stream.
+ * @return {stream} File stream.
  */
 function copy() {
     return gulp.src([
@@ -71,10 +41,9 @@ function copy() {
 }
 
 /**
- * Builds the application by running an
- * environment config through Webpack.
- * @param  {Function} done callback
- * @return {undefined}     undefined
+ * Builds the application by running an environment config through Webpack.
+ * @param  {function} done Callback.
+ * @return {undefined}     Undefined.
  */
 function build(done) {
     var config = require(args.release ? './webpack.release.config.js' : './webpack.config.js');
@@ -82,10 +51,10 @@ function build(done) {
     var callbackCount = 0;
 
     /**
-     * Webpacks complete callback
-     * @param  {Object} err   Webpacks error object
-     * @param  {Object} stats Webpacks build statistics
-     * @return {undefined}    undefined
+     * Webpacks complete callback.
+     * @param  {object} err   Webpacks error object.
+     * @param  {object} stats Webpacks build statistics.
+     * @return {undefined}    Undefined.
      */
     function webpackCallback(err, stats) {
         var jsonStats = stats.toJson();
