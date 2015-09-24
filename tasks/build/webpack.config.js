@@ -27,7 +27,7 @@ defaultConfig = {
     debug: true,
     devtool: 'source-map',
     context: srcDir,
-    entry: './entry.js',
+    entry: './entryClient.js',
     target: 'web',
     output: {
         path: distDir,

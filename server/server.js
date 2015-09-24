@@ -13,6 +13,8 @@ var livereload = require('connect-livereload');
 var debug = require('debug')('app');
 var colors = require('colors/safe');
 var app = express();
+var entry = require('./../dist/entryServer');
+var stats = require('./../dist/stats');
 
 /**
  * Set app settings
@@ -43,9 +45,8 @@ if (config.NODE_ENV !== 'production') {
     }));
 }
 
-// TODO: Use React to build index.html
-app.use(function(req, res) {
-    res.sendFile(path.join(__dirname, '../src/index.html'));
+app.use(function(req, res, next) {
+    entry(req, res, next, stats);
 });
 
 /**

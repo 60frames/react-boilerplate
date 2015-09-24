@@ -47,7 +47,7 @@ function copy() {
  */
 function build(done) {
     var config = require(args.release ? './webpack.release.config.js' : './webpack.config.js');
-    var compiler = webpack(config);
+    var compiler = webpack([config, require('./webpack.server.config.js')]);
     var callbackCount = 0;
 
     /**
