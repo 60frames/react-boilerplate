@@ -15,11 +15,16 @@ export default (req, res, next, stats) => {
     let js = '/' + stats.assetsByChunkName.main[0];
     let css = '/' + stats.assetsByChunkName.main[1];
 
-    Router.run(routes, req.url, (Handler) => {
+    Router.run(routes, req.url, (Handler, state) => {
+        let isNotFound = state.routes.some((route) => {
+            return route.isNotFound;
+        });
         let markup = React.renderToString(<Handler />);
-        var html = React.renderToStaticMarkup(
+        let html = React.renderToStaticMarkup(
             <Html js={js} css={css} markup={markup} />
         );
-        res.send('<!doctype html>' + html);
+
+        res.status(isNotFound ? 404 : 200)
+           .send('<!doctype html>' + html);
     });
 };
