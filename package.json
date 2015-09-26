@@ -5,6 +5,7 @@
   "private": true,
   "main": "",
   "scripts": {
+    "start": "gulp build --release; gulp serve",
     "lint": "gulp lint",
     "test": "gulp test"
   },
