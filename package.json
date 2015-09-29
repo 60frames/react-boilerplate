@@ -61,6 +61,7 @@
     "ms": "^0.7.1",
     "object-assign": "^3.0.0",
     "react": "^0.13.3",
+    "react-helmet": "^1.1.5",
     "react-router": "^0.13.3"
   },
   "devDependencies": {

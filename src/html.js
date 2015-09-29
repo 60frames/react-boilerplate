@@ -5,7 +5,8 @@ let Html = React.createClass({
     propTypes: {
         css: React.PropTypes.string,
         js: React.PropTypes.string,
-        markup: React.PropTypes.string
+        markup: React.PropTypes.string,
+        head: React.PropTypes.object
     },
 
     render() {
@@ -14,8 +15,8 @@ let Html = React.createClass({
                 <head>
                     <meta charSet="utf-8" />
                     <meta httpEquiv="x-ua-compatible" content="ie=edge,chrome=1" />
-                    <title>React Boilerplate</title>
-                    <meta name="description" content="" />
+                    <title>{this.props.head.title}</title>
+                    <meta name="description" content="A react and Webpack boilerplate" />
                     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
                     <meta name="apple-mobile-web-app-capable" content="yes" />
                     <link rel="apple-touch-icon" href="apple-touch-icon.png" />

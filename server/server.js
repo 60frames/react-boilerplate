@@ -45,9 +45,10 @@ if (config.NODE_ENV !== 'production') {
     }));
 }
 
-app.use(function(req, res, next) {
-    entry(req, res, next, stats);
-});
+/**
+ * Server entrypoint middleware
+ */
+app.use(entry(stats));
 
 /**
  * Start listening
