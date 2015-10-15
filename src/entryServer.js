@@ -28,6 +28,7 @@ export default (stats) => {
             // TODO: Only using the Helmet title functionality for now
             // as we have to dangerouslySetInnerHTML to use the
             // meta and this adds <div>'s in the <head>.
+
             // Must Helmet.rewind after renderToString.
             let head = Helmet.rewind();
             let html = React.renderToStaticMarkup(
@@ -35,7 +36,7 @@ export default (stats) => {
             );
 
             res.status(isNotFound ? 404 : 200)
-               .send('<!doctype html>' + html.replace(/<(\/)?div>/i, ''));
+               .send('<!doctype html>' + html);
         });
     };
 };

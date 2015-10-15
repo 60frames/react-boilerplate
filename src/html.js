@@ -6,7 +6,7 @@ let Html = React.createClass({
         css: React.PropTypes.string,
         js: React.PropTypes.string,
         markup: React.PropTypes.string,
-        head: React.PropTypes.object
+        head: React.PropTypes.object.isRequired
     },
 
     render() {
