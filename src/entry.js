@@ -11,5 +11,5 @@ import Modernizr from 'modernizr';
 logger.info('App started...');
 
 Router.run(routes, Router.HistoryLocation, function(Handler) {
-    React.render(<Handler/>, document.getElementById('content'));
+    React.render(<Handler/>, document.getElementById('root'));
 });
