@@ -1,3 +1,10 @@
 {
-    "extends": "./node_modules/coding-standards/.eslintrc-node"
+    "extends": "./node_modules/60frames-coding-standards/.eslintrc-node",
+    "env": {
+    	"es6": true
+    },
+    "rules": {
+        "valid-jsdoc": 0,
+        "func-style": [2, "declaration", { "allowArrowFunctions": true }]
+    }
 }

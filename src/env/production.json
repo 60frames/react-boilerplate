@@ -1,0 +1,5 @@
+{
+    // Env files support comments
+    "CLIENT_ENV": "production",
+    "API_ENDPOINT": "http://60fram.es/api"
+}

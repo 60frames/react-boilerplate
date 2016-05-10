@@ -8,7 +8,7 @@ NODE_ENV=development
 
 # Show debugger output in terminal
 # https://github.com/visionmedia/debug#wildcards
-DEBUG=app
+DEBUG=app, webpack-universal-renderer-middleware
 
 # Server listening port
 PORT=6060
@@ -17,7 +17,6 @@ PORT=6060
 # https://github.com/rauchg/ms.js
 BROWSER_CACHE=0
 
-# Whether to use livereload middleware to use alongside
-# the `gulp build --livereload`. This can also be forced
-# when running `gulp serve --livereload`.
-# LIVERELOAD=true
+# Whether to serve client side assets using webpack-dev-middleware middleware
+# instead of /dist.
+WEBPACK_DEV_SERVER=true

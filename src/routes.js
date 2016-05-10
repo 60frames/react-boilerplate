@@ -1,16 +1,16 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
-/* eslint-enable no-unused-vars */
-import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
-import Layout from './components/layout/layout';
-import Index from './components/index/index';
-import four04 from './components/four04/four04';
+import { Route, IndexRoute, Redirect } from 'react-router';
+import Helmet from 'react-helmet';
+import App from './containers/App';
+import Index from './components/Index';
+import NotFound from './components/NotFound';
 
-var routes = (
-    <Route name="layout" handler={Layout} path="/">
-        <DefaultRoute name="index" handler={Index} />
-        <NotFoundRoute name="four04" handler={four04} />
+export default (
+    <Route path="/" component={App}>
+        <IndexRoute component={Index} />
+        <Redirect from="foo" to="/" />
+        <Route path="*" component={NotFound} />
     </Route>
 );
 
-export default routes;
+export { NotFound as NotFoundComponent };
