@@ -1,0 +1,5 @@
+{
+    // Env files support comments
+    "CLIENT_ENV": "development",
+    "API_ENDPOINT": "http://localhost:6060/api"
+}

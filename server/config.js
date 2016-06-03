@@ -1,22 +1,23 @@
-/* eslint-disable no-process-env, no-console */
-var path = require('path');
-var fs = require('fs');
-var objectAssign = require('object-assign');
-var dotenv = require('dotenv');
-var envPath = path.join(__dirname, './.env');
-var colors = require('colors/safe');
+'use strict';
+
+const path = require('path');
+const fs = require('fs');
+const dotenv = require('dotenv');
+const colors = require('colors/safe');
+
+const ENV_PATH = path.join(__dirname, './.env');
 
 // The absence of a NODE_ENV suggests we are running locally
 // and not in a deployed environment so we load the local .env file.
 if (!process.env.NODE_ENV) {
     try {
-        fs.statSync(envPath);
+        fs.statSync(ENV_PATH);
         dotenv.load({
-            path: envPath
+            path: ENV_PATH
         });
-    } catch(e) {
-        throw new Error(colors.red('`' + envPath + '` does not exist.' +
-            ' Try renaming the `_env` file.'));
+    } catch (e) {
+        throw new Error(colors.red(`${ENV_PATH} does not exist.
+            Try renaming the '_env' file.`));
     }
 }
 
@@ -24,4 +25,4 @@ if (!process.env.NODE_ENV) {
  * A copy of process.env
  * @type {Object}
  */
-module.exports = objectAssign({}, process.env);
+module.exports = Object.assign({}, process.env);
