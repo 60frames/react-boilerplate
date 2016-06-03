@@ -2,5 +2,13 @@
     "extends": "./../node_modules/60frames-coding-standards/.eslintrc-react",
     "env": {
         "node": false
+    },
+    "globals": {
+        "process": false
+    },
+    "rules": {
+        "valid-jsdoc": 0,
+        "no-process-env": 0,
+        "object-curly-spacing": [2, "always"]
     }
 }

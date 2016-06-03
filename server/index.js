@@ -1,11 +1,8 @@
 'use strict';
 
 const config = require('./config');
-const path = require('path');
 const express = require('express');
-const ms = require('ms');
 const compression = require('compression');
-const fs = require('fs');
 const debug = require('debug')('app');
 const colors = require('colors/safe');
 const api = require('./routes/api');

@@ -19,6 +19,7 @@ render(
     document.getElementById('root')
 );
 
+/* eslint-disable */
 if (module.hot) {
     module.hot.accept('./containers/Root', () => {
         render(
@@ -30,3 +31,4 @@ if (module.hot) {
         );
     });
 }
+/* eslint-enable */

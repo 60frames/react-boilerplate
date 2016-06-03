@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-function Html({css, js, html, head, initialState}) {
+function Html({ css, js, html, head, initialState }) {
     return (
         <html lang="en">
             <head>

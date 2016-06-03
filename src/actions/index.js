@@ -8,7 +8,7 @@ function fetchPostsFailure(error) {
     return {
         type: FETCH_POSTS_FAILURE,
         error: error
-    }
+    };
 }
 
 function fetchPostsSuccess(data) {
@@ -16,7 +16,7 @@ function fetchPostsSuccess(data) {
         type: FETCH_POSTS_SUCCESS,
         receivedAt: Date.now(),
         data
-    }
+    };
 }
 
 function fetchPosts() {
@@ -29,7 +29,7 @@ function fetchPosts() {
                 data => dispatch(fetchPostsSuccess(data)),
                 error => dispatch(fetchPostsFailure(error))
             );
-    }
+    };
 }
 
 function shouldFetchPosts(state) {

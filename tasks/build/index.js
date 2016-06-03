@@ -62,7 +62,7 @@ async.series([
         async.parallel([
             copy,
             build
-        ], done)
+        ], done);
     }
 ], err => {
     if (err) {

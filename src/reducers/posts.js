@@ -10,7 +10,7 @@ function posts(state = {
     lastUpdated: 0,
     data: []
 }, action) {
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_POSTS:
             return {
                 ...state,

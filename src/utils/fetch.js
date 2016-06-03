@@ -6,7 +6,7 @@ function checkStatus(response) {
         return response;
     }
     throw response;
-};
+}
 
 function parseSuccess(response) {
     if (response.status === 201 || response.status === 204) {
@@ -16,7 +16,7 @@ function parseSuccess(response) {
         .catch(() => {
             throw new NetworkError('Invalid JSON Response', response.status);
         });
-};
+}
 
 function parseError(response) {
     if (response && typeof response.json === 'function') {
@@ -59,6 +59,6 @@ function xhr(url, options = {}) {
     return fetch(url, options)
         .then(checkStatus)
         .then(parseSuccess, parseError);
-};
+}
 
 export default xhr;

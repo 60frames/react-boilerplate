@@ -8,12 +8,12 @@ function Root({ store, history }) {
         <Provider store={store}>
             <Router history={history} routes={routes} />
         </Provider>
-    )
+    );
 }
 
 Root.propTypes = {
     store: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
-}
+};
 
 export default Root;

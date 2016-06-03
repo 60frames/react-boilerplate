@@ -5,6 +5,6 @@
     },
     "rules": {
         "valid-jsdoc": 0,
-        "func-style": [2, "declaration", { "allowArrowFunctions": true }]
+        "no-process-env": 0
     }
 }

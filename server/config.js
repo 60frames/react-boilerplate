@@ -1,5 +1,3 @@
-/* eslint-disable no-process-env, no-console */
-
 'use strict';
 
 const path = require('path');

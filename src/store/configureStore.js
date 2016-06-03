@@ -17,11 +17,12 @@ export default function configureStore(initialState) {
         initialState,
         compose(
             applyMiddleware(...middleware),
-            process.env.BROWSER
-                && window.devToolsExtension ? window.devToolsExtension() : f => f
+            process.env.BROWSER && window.devToolsExtension
+                ? window.devToolsExtension() : f => f
         )
     );
 
+    /* eslint-disable */
     if (process.env.CLIENT_ENV !== 'production' && module.hot) {
         // Enable Webpack hot module replacement for reducers
         module.hot.accept('../reducers', () => {
@@ -29,6 +30,7 @@ export default function configureStore(initialState) {
             store.replaceReducer(nextRootReducer);
         });
     }
+    /* eslint-enable */
 
     return store;
 }

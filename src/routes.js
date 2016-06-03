@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, IndexRoute, Redirect } from 'react-router';
-import Helmet from 'react-helmet';
 import App from './containers/App';
 import Index from './components/Index';
 import NotFound from './components/NotFound';
