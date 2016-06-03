@@ -8,7 +8,8 @@ const DEFAULT_TITLE = 'React Boilerplate';
 class App extends Component {
 
     componentDidMount() {
-        App.fetchData(this.context.store);
+        const { dispatch } = this.props;
+        App.fetchData(dispatch);
     }
 
     render() {
@@ -22,12 +23,8 @@ class App extends Component {
     }
 }
 
-App.contextTypes = {
-    store: PropTypes.object.isRequired
-};
-
-App.fetchData = function(store) {
-    return store.dispatch(fetchPostsIfNeeded());
+App.fetchData = function(dispatch) {
+    return dispatch(fetchPostsIfNeeded());
 };
 
 function mapStateToProps(state) {
