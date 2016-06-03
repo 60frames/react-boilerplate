@@ -14,7 +14,7 @@ function fetchComponentData(renderProps, store) {
             component = component.WrappedComponent;
         }
         if (component.fetchData) {
-            return component.fetchData(store)
+            return component.fetchData(store.dispatch)
                 // Make sure promise always successfully resolves
                 .catch(() => {});
         }
