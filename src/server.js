@@ -8,17 +8,26 @@ import routes, { NotFoundComponent } from './routes';
 import Html from './components/html';
 
 function fetchComponentData(renderProps, store) {
-    const requests = renderProps.components.map(component => {
-        // Handle `connect`ed components.
-        if (component.WrappedComponent) {
-            component = component.WrappedComponent;
-        }
-        if (component.fetchData) {
-            return component.fetchData(store.dispatch)
+    const requests = renderProps.components
+        // filter undefined values
+        .filter(component => component)
+        .map(component => {
+            // Handle `connect`ed components.
+            if (component.WrappedComponent) {
+                component = component.WrappedComponent;
+            }
+            if (component.fetchData) {
+                const { query, params, history } = renderProps;
+                return component.fetchData({
+                    dispatch: store.dispatch,
+                    query,
+                    params,
+                    history
+                })
                 // Make sure promise always successfully resolves
                 .catch(() => {});
-        }
-    });
+            }
+        });
 
     return Promise.all(requests);
 }
@@ -72,7 +81,7 @@ export default stats => {
      * @param  {object}     res Express response object
      * @return {undefined}  undefined
      */
-    return (req, res) => {
+    return (req, res, next) => {
         match({
             routes,
             location: req.url
@@ -85,8 +94,14 @@ export default stats => {
                 const store = configureStore();
                 fetchComponentData(renderProps, store)
                     .then(() => {
+                        let html;
+                        try {
+                            html = render(stats, renderProps, store);
+                        } catch (ex) {
+                            return next(ex);
+                        }
                         res.status(isNotFound(renderProps) ? 404 : 200)
-                            .send(`<!doctype html>${render(stats, renderProps, store)}`);
+                            .send(`<!doctype html>${html}`);
                     });
             }
         });
