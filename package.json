@@ -32,7 +32,7 @@
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
     "progress-bar-webpack-plugin": "^1.6.0",
-    "react-hot-loader": "^3.0.0-alpha.12",
+    "react-hot-loader": "^3.0.0-beta.1",
     "simple-define-webpack-plugin": "git+ssh://git@github.com:richardscarrott/simple-define-webpack-plugin.git#master",
     "stats-webpack-plugin": "^0.3.1",
     "strip-json-comments": "^2.0.1",

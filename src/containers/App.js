@@ -9,7 +9,7 @@ class App extends Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        App.fetchData(dispatch);
+        App.fetchData({ dispatch });
     }
 
     render() {
@@ -23,7 +23,7 @@ class App extends Component {
     }
 }
 
-App.fetchData = function(dispatch) {
+App.fetchData = function({ dispatch }) {
     return dispatch(fetchPostsIfNeeded());
 };
 
