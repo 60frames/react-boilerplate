@@ -21,9 +21,11 @@ function Html({ css, js, html, head, initialState }) {
                 <div id="root" dangerouslySetInnerHTML={{
                     __html: html
                 }} />
-                <script dangerouslySetInnerHTML={{
-                    __html: `window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}`
-                }} />
+                {initialState ? (
+                    <script dangerouslySetInnerHTML={{
+                        __html: `window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}`
+                    }} />
+                ) : null}
                 <script src={js}></script>
             </body>
         </html>
@@ -35,7 +37,7 @@ Html.propTypes = {
     js: PropTypes.string.isRequired,
     html: PropTypes.string,
     head: PropTypes.object.isRequired,
-    initialState: PropTypes.object.isRequired
+    initialState: PropTypes.object
 };
 
 export default Html;

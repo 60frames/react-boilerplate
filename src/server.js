@@ -1,11 +1,25 @@
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
-import { Provider } from 'react-redux';
 import Helmet from 'react-helmet';
-import configureStore from './store/configureStore';
-import routes, { NotFoundComponent } from './routes';
 import Html from './components/html';
+
+let match;
+let RouterContext;
+let Provider;
+let configureStore;
+let routes;
+let NotFoundComponent;
+
+if (!process.env.DISABLE_UNIVERSAL_RENDERING) {
+    match = require('react-router').match;
+    RouterContext = require('react-router').RouterContext;
+    Provider = require('react-redux').Provider;
+    configureStore = require('./store/configureStore').default;
+    routes = require('./routes').default;
+    NotFoundComponent = require('./routes').NotFoundComponent;
+}
+
+const DOCTYPE = '<!doctype html>';
 
 function fetchComponentData(renderProps, store) {
     const requests = renderProps.components
@@ -45,28 +59,31 @@ function getCssFromStats(stats) {
     return stats.assetsByChunkName.client.find(asset => /\.css$/.test(asset));
 }
 
-function render(stats, renderProps, store) {
-    const js = getJsFromStats(stats);
-    const css = getCssFromStats(stats);
-
-    const markup = renderToString(
+function renderApp(renderProps, store) {
+    const html = renderToString(
         <Provider store={store}>
             <RouterContext {...renderProps} />
         </Provider>
     );
 
+    const state = store.getState();
+
+    return [html, state];
+}
+
+function render(stats, html = '', state) {
+    const js = getJsFromStats(stats);
+    const css = getCssFromStats(stats);
     const head = Helmet.rewind();
 
-    const html = renderToStaticMarkup(
+    return renderToStaticMarkup(
         <Html
             js={js && `/${js}`}
             css={css && `/${css}`}
-            html={markup}
+            html={html}
             head={head}
-            initialState={store.getState()} />
+            initialState={state} />
     );
-
-    return html;
 }
 
 /**
@@ -74,7 +91,7 @@ function render(stats, renderProps, store) {
  * @param  {object}     stats Webpack stats output
  * @return {function}   middleware function
  */
-export default stats => {
+export default (stats) => {
 
     /**
      * @param  {object}     req Express request object
@@ -82,6 +99,17 @@ export default stats => {
      * @return {undefined}  undefined
      */
     return (req, res, next) => {
+        if (process.env.DISABLE_UNIVERSAL_RENDERING) {
+            let html;
+            try {
+                html = render(stats);
+            } catch (ex) {
+                return next(ex);
+            }
+            return res.status(200)
+                .send(`${DOCTYPE}${html}`);
+        }
+
         match({
             routes,
             location: req.url
@@ -96,12 +124,13 @@ export default stats => {
                     .then(() => {
                         let html;
                         try {
-                            html = render(stats, renderProps, store);
+                            const [markup, state] = renderApp(renderProps, store);
+                            html = render(stats, markup, state);
                         } catch (ex) {
                             return next(ex);
                         }
                         res.status(isNotFound(renderProps) ? 404 : 200)
-                            .send(`<!doctype html>${html}`);
+                            .send(`${DOCTYPE}${html}`);
                     });
             }
         });
