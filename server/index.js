@@ -20,6 +20,12 @@ if (config.WEBPACK_DEV_SERVER === 'true') {
     app.use(require('./routes/static'));
 }
 
+if (config.NODE_ENV === 'development') {
+    const errorhandler = require('errorhandler');
+    errorhandler.title = 'Error :(';
+    app.use(errorhandler());
+}
+
 app.listen(app.get('port'), () => {
     debug(`Server started: http://localhost:${app.get('port')}`);
     debug(colors.grey('Press \'ctrl + c\' to terminate server'));
