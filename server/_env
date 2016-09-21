@@ -17,6 +17,12 @@ PORT=6060
 # https://github.com/rauchg/ms.js
 BROWSER_CACHE=0
 
-# Whether to serve client side assets using webpack-dev-middleware middleware
-# instead of /dist.
+# Serve client side assets using webpack-dev-middleware instead of /dist.
 WEBPACK_DEV_SERVER=true
+
+# The api endpoint. Must be absolute to ensure url can be resolved when run on
+# the server.
+API_ENDPOINT=http://localhost:6060/api
+
+# Apply redux-logger middleware.
+REDUX_LOGGER=true

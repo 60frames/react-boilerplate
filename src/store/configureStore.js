@@ -7,7 +7,7 @@ const middleware = [
     thunk
 ];
 
-if (process.env.BROWSER && process.env.CLIENT_ENV !== 'production') {
+if (process.env.BROWSER && process.env.REDUX_LOGGER) {
     middleware.push(createLogger());
 }
 
@@ -23,7 +23,7 @@ export default function configureStore(initialState) {
     );
 
     /* eslint-disable */
-    if (process.env.CLIENT_ENV !== 'production' && module.hot) {
+    if (module.hot) {
         // Enable Webpack hot module replacement for reducers
         module.hot.accept('../reducers', () => {
             const nextRootReducer = require('../reducers').default;

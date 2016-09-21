@@ -1,6 +1,5 @@
 'use strict';
 
-const config = require('../config');
 const express = require('express');
 const path = require('path');
 const ms = require('ms');
@@ -26,7 +25,7 @@ try {
 }
 
 router.use(express.static(DIST_DIR, {
-    maxAge: ms(config.BROWSER_CACHE || 0)
+    maxAge: ms(process.env.BROWSER_CACHE || 0)
 }));
 
 router.use(universalRenderer(stats));

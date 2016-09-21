@@ -22,6 +22,15 @@ function Html({ css, js, html, head, initialState }) {
                     __html: html
                 }} />
                 <script dangerouslySetInnerHTML={{
+                    __html: `window.process = {
+                        env: {
+                            BROWSER: true,
+                            REDUX_LOGGER: ${process.env.REDUX_LOGGER},
+                            API_ENDPOINT: '${process.env.API_ENDPOINT}'
+                        }
+                    }`
+                }} />
+                <script dangerouslySetInnerHTML={{
                     __html: `window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}`
                 }} />
                 <script src={js}></script>

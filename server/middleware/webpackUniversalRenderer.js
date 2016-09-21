@@ -22,7 +22,7 @@ function findStats(multiStats, name) {
 function webpackUniversalRenderer(multiCompiler, options) {
     debug('Using webpack-universal-renderer-middleware');
 
-    if (!multiCompiler instanceof  MultiCompiler) {
+    if (!multiCompiler instanceof MultiCompiler) {
         throw new Error('Expected webpack compiler to contain both a `client` and `server` config');
     }
 
