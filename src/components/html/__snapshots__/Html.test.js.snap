@@ -1,0 +1,63 @@
+exports[`components/html/Html renders correctly 1`] = `
+<html
+  lang="en">
+  <head>
+    <meta
+      charSet="utf-8" />
+    <meta
+      content="ie=edge,chrome=1"
+      httpEquiv="x-ua-compatible" />
+    <title>title</title>
+    <meta />
+    <meta
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+      name="viewport" />
+    <meta
+      content="yes"
+      name="apple-mobile-web-app-capable" />
+    <meta
+      content="no"
+      name="msapplication-tap-highlight" />
+    <link
+      href="apple-touch-icon.png"
+      rel="apple-touch-icon" />
+    <link />
+    <link
+      href="https://60fram.es/bundle.css"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "
+                            <div id=\"root\">
+                                Hello World.
+                            </div>
+                        "
+        }
+      }
+      id="root" />
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "window.process = {
+                                env: {
+                                    BROWSER: true,
+                                    REDUX_LOGGER: undefined,
+                                    API_ENDPOINT: \'undefined\'
+                                }
+                            }"
+        }
+      } />
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "window.__INITIAL_STATE__ = {\"initial\":\"state\"}"
+        }
+      } />
+    <script
+      src="https://60fram.es/bundle.js" />
+  </body>
+</html>
+`;

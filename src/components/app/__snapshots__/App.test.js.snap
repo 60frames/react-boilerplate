@@ -1,0 +1,9 @@
+exports[`components/app/App renders correctly 1`] = `
+<div
+  className="root">
+  <Helmet
+    defaultTitle="React Boilerplate"
+    titleTemplate="%s | React Boilerplate" />
+  Hello world.
+</div>
+`;

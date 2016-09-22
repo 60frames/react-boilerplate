@@ -1,0 +1,16 @@
+exports[`components/root/Root renders correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "store": "store"
+    }
+  }>
+  <Router
+    history={
+      Object {
+        "history": "history"
+      }
+    }
+    routes="routes" />
+</Provider>
+`;

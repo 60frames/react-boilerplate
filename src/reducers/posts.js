@@ -2,7 +2,7 @@ import {
     FETCH_POSTS,
     FETCH_POSTS_SUCCESS,
     FETCH_POSTS_FAILURE
-} from '../actions';
+} from '../actions/posts/posts';
 
 function posts(state = {
     isFetching: false,

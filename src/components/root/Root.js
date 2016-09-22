@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import routes from '../routes';
+import routes from '../../routes';
 import { Router } from 'react-router';
 
 function Root({ store, history }) {

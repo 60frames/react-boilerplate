@@ -1,0 +1,5 @@
+exports[`components/index/Index renders correctly 1`] = `
+<div>
+  Hello World
+</div>
+`;

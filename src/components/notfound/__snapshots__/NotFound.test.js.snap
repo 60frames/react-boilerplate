@@ -1,0 +1,5 @@
+exports[`components/notfound/NotFound renders correctly 1`] = `
+<div>
+  404 Not Found
+</div>
+`;

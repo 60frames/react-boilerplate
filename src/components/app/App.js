@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { fetchPostsIfNeeded } from '../actions';
+import { fetchPostsIfNeeded } from '../../actions/posts/posts';
+import styles from './App.css';
 
 const DEFAULT_TITLE = 'React Boilerplate';
 
-class App extends Component {
+export class App extends Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
@@ -14,7 +15,7 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className={styles.root}>
                 <Helmet titleTemplate={`%s | ${DEFAULT_TITLE}`} defaultTitle={DEFAULT_TITLE} />
                 {this.props.children}
                 {JSON.stringify(this.props.data)}

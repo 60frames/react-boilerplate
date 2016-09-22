@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import Helmet from 'react-helmet';
 import configureStore from './store/configureStore';
 import routes, { NotFoundComponent } from './routes';
-import Html from './components/html';
+import Html from './components/html/Html';
 
 function fetchComponentData(renderProps, store) {
     const requests = renderProps.components
