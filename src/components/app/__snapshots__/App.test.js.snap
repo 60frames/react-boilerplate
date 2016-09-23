@@ -2,8 +2,17 @@ exports[`components/app/App renders correctly 1`] = `
 <div
   className="root">
   <Helmet
-    defaultTitle="React Boilerplate"
-    titleTemplate="%s | React Boilerplate" />
+    defaultTitle="60fram.es React Boilerplate"
+    titleTemplate="%s | 60fram.es React Boilerplate" />
+  <div
+    className="logo">
+    <Link
+      className="logoContent"
+      title="Home"
+      to="/">
+      60fram.es
+    </Link>
+  </div>
   Hello world.
 </div>
 `;

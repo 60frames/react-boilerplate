@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import posts from 'reducers/posts';
+import quote from 'reducers/quote/quote';
 
 const rootReducer = combineReducers({
-    posts,
+    quote,
     routing: routerReducer
 });
 

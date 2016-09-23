@@ -49,8 +49,17 @@ module.exports = function generateConfig(options) {
         },
         target: options.node ? 'node' : 'web',
         debug: !!options.debug,
-        plugins: getPlugins(options)
+        plugins: getPlugins(options),
+        node: {
+            // Prevents the `process.env` defined on the `window` in Html.js
+            // from being re-defined inside modules by https://github.com/webpack/node-libs-browser
+            process: false
+        }
     };
+
+    if (options.publicPath) {
+        config.output.publicPath = options.publicPath;
+    }
 
     if (options.node) {
         config.output.libraryTarget = 'commonjs2';

@@ -1,3 +1,52 @@
 .root {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 90%;
+    max-width: 500px;
+}
 
+.logo {
+    background-image: url('components/app/Logo.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100%;
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    text-indent: -9999em;
+    overflow: hidden;
+    margin: 0 auto 2em;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-name: breathe;
+}
+
+.logo:before {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-top: 32.564102564103%;
+}
+
+.logoContent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+@keyframes breathe {
+    0% {
+        transform: translate(0%, 0%);
+    }
+    50% {
+        transform: translate(0%, 8%);
+    }
+    100% {
+        transform: translate(0%, 0%);
+    }
 }

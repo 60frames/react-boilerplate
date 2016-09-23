@@ -38,11 +38,19 @@ function isNotFound(renderProps) {
 }
 
 function getJsFromStats(stats) {
-    return stats.assetsByChunkName.client.find(asset => /\.js$/.test(asset));
+    let assets = stats.assetsByChunkName.client;
+    if (!Array.isArray(assets)) {
+        assets = [assets];
+    }
+    return assets.find(asset => /\.js$/.test(asset));
 }
 
 function getCssFromStats(stats) {
-    return stats.assetsByChunkName.client.find(asset => /\.css$/.test(asset));
+    let assets = stats.assetsByChunkName.client;
+    if (!Array.isArray(assets)) {
+        assets = [assets];
+    }
+    return assets.find(asset => /\.css$/.test(asset));
 }
 
 function render(stats, renderProps, store) {

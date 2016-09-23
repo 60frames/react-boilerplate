@@ -1,36 +1,37 @@
 import {
-    FETCH_POSTS,
-    FETCH_POSTS_SUCCESS,
-    FETCH_POSTS_FAILURE
-} from 'actions/posts/posts';
+    FETCH_QUOTE_REQUEST,
+    FETCH_QUOTE_SUCCESS,
+    FETCH_QUOTE_FAILURE
+} from 'actions/quote/quote';
 
-function posts(state = {
+function quote(state = {
     isFetching: false,
     error: false,
     lastUpdated: 0,
-    data: []
+    value: ''
 }, action) {
     switch (action.type) {
-        case FETCH_POSTS:
+        case FETCH_QUOTE_REQUEST:
             return {
                 ...state,
-                isFetching: true
+                isFetching: true,
+                error: false
             };
-        case FETCH_POSTS_SUCCESS:
+        case FETCH_QUOTE_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
-                data: action.data
+                value: action.payload
             };
-        case FETCH_POSTS_FAILURE:
+        case FETCH_QUOTE_FAILURE:
             return {
                 ...state,
                 isFetching: false,
-                error: action.error.message
+                error: action.payload
             };
         default:
             return state;
     }
 }
 
-export default posts;
+export default quote;

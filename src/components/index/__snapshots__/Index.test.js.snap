@@ -1,5 +1,27 @@
-exports[`components/index/Index renders correctly 1`] = `
-<div>
-  Hello World
+exports[`components/index/Index renders a loading indicator 1`] = `
+<div
+  className="root">
+  <p>
+    Loading...
+  </p>
+</div>
+`;
+
+exports[`components/index/Index renders a quote 1`] = `
+<div
+  className="root">
+  <p>
+    A quote
+  </p>
+</div>
+`;
+
+exports[`components/index/Index renders an error 1`] = `
+<div
+  className="root">
+  <p>
+    Error... 
+    An error
+  </p>
 </div>
 `;

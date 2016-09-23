@@ -1,37 +1,22 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import Helmet from 'react-helmet';
-import { fetchPostsIfNeeded } from 'actions/posts/posts';
+import { Link } from 'react-router';
 import styles from 'components/app/App.css';
 
-const DEFAULT_TITLE = 'React Boilerplate';
+const DEFAULT_TITLE = '60fram.es React Boilerplate';
 
-export class App extends Component {
-
-    componentDidMount() {
-        const { dispatch } = this.props;
-        App.fetchData({ dispatch });
-    }
-
-    render() {
-        return (
-            <div className={styles.root}>
-                <Helmet titleTemplate={`%s | ${DEFAULT_TITLE}`} defaultTitle={DEFAULT_TITLE} />
-                {this.props.children}
-                {JSON.stringify(this.props.data)}
+function App({ children }) {
+    return (
+        <div className={styles.root}>
+            <Helmet titleTemplate={`%s | ${DEFAULT_TITLE}`} defaultTitle={DEFAULT_TITLE} />
+            <div className={styles.logo}>
+                <Link to="/" title="Home" className={styles.logoContent}>
+                    60fram.es
+                </Link>
             </div>
-        );
-    }
+            {children}
+        </div>
+    );
 }
 
-App.fetchData = function({ dispatch }) {
-    return dispatch(fetchPostsIfNeeded());
-};
-
-function mapStateToProps(state) {
-    return {
-        ...state.posts
-    };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
