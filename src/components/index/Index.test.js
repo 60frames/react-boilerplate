@@ -2,7 +2,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Index from './Index';
+import Index from 'components/index/Index';
 
 describe('components/index/Index', () => {
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import NotFound from './NotFound';
+import NotFound from 'components/notfound/NotFound';
 
 describe('components/notfound/NotFound', () => {
 

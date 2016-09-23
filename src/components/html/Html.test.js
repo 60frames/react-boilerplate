@@ -2,7 +2,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Html from './Html';
+import Html from 'components/html/Html';
 
 describe('components/html/Html', () => {
 

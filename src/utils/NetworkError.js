@@ -1,4 +1,4 @@
-import ExtendableError from './ExtendableError';
+import ExtendableError from 'utils/ExtendableError';
 
 class NetworkError extends ExtendableError {
     constructor(message, status, json = {}) {

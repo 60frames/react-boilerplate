@@ -1,17 +1,17 @@
 /* global jest */
 /* eslint-env jasmine */
 
-jest.mock('../../utils/fetch');
+jest.mock('utils/fetch');
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import fetch from '../../utils/fetch';
+import fetch from 'utils/fetch';
 import {
     FETCH_POSTS,
     FETCH_POSTS_SUCCESS,
     FETCH_POSTS_FAILURE,
     fetchPostsIfNeeded
-} from './posts';
+} from 'actions/posts/posts';
 
 const mockStore = configureMockStore([
     thunk

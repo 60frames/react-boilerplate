@@ -1,4 +1,4 @@
-import fetch from '../../utils/fetch';
+import fetch from 'utils/fetch';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';

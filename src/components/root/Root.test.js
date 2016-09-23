@@ -3,11 +3,11 @@
 
 jest.mock('react-redux');
 jest.mock('react-router');
-jest.mock('../../routes', () => 'routes');
+jest.mock('routes', () => 'routes');
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Root from './Root';
+import Root from 'components/root/Root';
 
 describe('components/root/Root', () => {
 

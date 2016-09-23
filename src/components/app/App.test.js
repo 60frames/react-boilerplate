@@ -5,7 +5,7 @@ jest.mock('react-helmet', () => 'Helmet');
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { App } from './App';
+import { App } from 'components/app/App';
 
 describe('components/app/App', () => {
 

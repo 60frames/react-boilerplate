@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import NetworkError from './NetworkError';
+import NetworkError from 'utils/NetworkError';
 
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
