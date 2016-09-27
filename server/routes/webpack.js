@@ -5,7 +5,7 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackUniversalRenderer = require('../middleware/webpackUniversalRenderer');
+const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const config = require('../../tasks/build/webpack.config');
 
 const router = express.Router();
@@ -16,8 +16,8 @@ router.use(webpackDevMiddleware(compiler, {
     publicPath: config[0].output.publicPath
 }));
 router.use(webpackHotMiddleware(compiler));
-router.use(webpackUniversalRenderer(compiler, {
-    universalRendererPath: path.join(__dirname, '../../dist/server.js')
+router.use(webpackHotServerMiddleware(compiler, {
+    chunkName: 'server'
 }));
 
 module.exports = router;

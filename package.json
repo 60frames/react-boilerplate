@@ -47,7 +47,8 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.15",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack-hot-middleware": "^2.10.0",
+    "webpack-hot-server-middleware": "0.0.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.7.4",
