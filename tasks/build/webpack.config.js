@@ -18,6 +18,7 @@ module.exports = [
     }),
     generateConfig({
         name: 'server',
-        node: true
+        node: true,
+        sourceMaps: true
     })
 ];
