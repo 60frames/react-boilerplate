@@ -7,8 +7,8 @@
 NODE_ENV=development
 
 # Show debugger output in terminal
-# https://github.com/visionmedia/debug#wildcards
-DEBUG=app, webpack-universal-renderer-middleware
+# https://github.com/visionmedia/debug
+DEBUG=app
 
 # Server listening port
 PORT=6060
