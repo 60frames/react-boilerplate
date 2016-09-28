@@ -18,6 +18,7 @@ module.exports = [
     }),
     generateConfig({
         name: 'server',
+        debug: true,
         node: true,
         sourceMaps: true
     })
