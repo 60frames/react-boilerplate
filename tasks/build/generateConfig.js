@@ -5,6 +5,7 @@ const StatsPlugin = require('stats-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SimpleDefinePlugin = require('simple-define-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 
@@ -170,9 +171,7 @@ function getCssLoaders(options) {
 }
 
 function getPlugins(options) {
-    let plugins = [
-        new ProgressBarPlugin()
-    ];
+    let plugins = [];
 
     if (options.optimize) {
         // Minify output. (also indirectly triggers CSS minification)
@@ -214,8 +213,7 @@ function getPlugins(options) {
     if (options.hot) {
         plugins = plugins.concat([
             new webpack.optimize.OccurenceOrderPlugin(),
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoErrorsPlugin()
+            new webpack.HotModuleReplacementPlugin()
         ]);
     }
 
