@@ -19,8 +19,35 @@ exports[`components/html/Html renders correctly 1`] = `
       content="no"
       name="msapplication-tap-highlight" />
     <link
-      href="apple-touch-icon.png"
-      rel="apple-touch-icon" />
+      href="/apple-touch-icon.png"
+      rel="apple-touch-icon"
+      sizes="180x180" />
+    <link
+      href="/favicon-32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png" />
+    <link
+      href="/favicon-16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png" />
+    <link
+      href="/manifest.json"
+      rel="manifest" />
+    <link
+      color="#5bbad5"
+      href="/safari-pinned-tab.svg"
+      rel="mask-icon" />
+    <meta
+      content="60fram.es"
+      name="apple-mobile-web-app-title" />
+    <meta
+      content="60fram.es"
+      name="application-name" />
+    <meta
+      content="#ffffff"
+      name="theme-color" />
     <link />
     <link
       href="https://60fram.es/bundle.css"
@@ -34,7 +61,7 @@ exports[`components/html/Html renders correctly 1`] = `
                             <div id=\"root\">
                                 Hello World.
                             </div>
-                        "
+                        ",
         }
       }
       id="root" />
@@ -43,17 +70,17 @@ exports[`components/html/Html renders correctly 1`] = `
         Object {
           "__html": "window.process = {
                                 env: {
-                                    BROWSER: true,
-                                    REDUX_LOGGER: undefined,
+                                    BROWSER: \'true\',
+                                    REDUX_LOGGER: \'undefined\',
                                     API_ENDPOINT: \'undefined\'
                                 }
-                            }"
+                            }",
         }
       } />
     <script
       dangerouslySetInnerHTML={
         Object {
-          "__html": "window.__INITIAL_STATE__ = {\"initial\":\"state\"}"
+          "__html": "window.__INITIAL_STATE__ = {\"initial\":\"state\"}",
         }
       } />
     <script

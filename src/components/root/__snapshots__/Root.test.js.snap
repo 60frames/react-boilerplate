@@ -2,13 +2,13 @@ exports[`components/root/Root renders correctly 1`] = `
 <Provider
   store={
     Object {
-      "store": "store"
+      "store": "store",
     }
   }>
   <Router
     history={
       Object {
-        "history": "history"
+        "history": "history",
       }
     }
     routes="routes" />
