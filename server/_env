@@ -20,6 +20,10 @@ BROWSER_CACHE=0
 # Serve client side assets using webpack-dev-middleware instead of /dist.
 WEBPACK_DEV_SERVER=true
 
+# Determines whether in browser or node env.
+# NOTE: This is explicitly set in the client.
+BROWSER=false
+
 # The api endpoint. Must be absolute to ensure url can be resolved when run on
 # the server.
 API_ENDPOINT=http://localhost:6060/api

@@ -7,7 +7,7 @@ const middleware = [
     thunk
 ];
 
-if (process.env.BROWSER && process.env.REDUX_LOGGER) {
+if (process.env.BROWSER === 'true' && process.env.REDUX_LOGGER === 'true') {
     middleware.push(createLogger());
 }
 
@@ -17,7 +17,7 @@ export default function configureStore(initialState) {
         initialState,
         compose(
             applyMiddleware(...middleware),
-            process.env.BROWSER && window.devToolsExtension
+            process.env.BROWSER === 'true' && window.devToolsExtension
                 ? window.devToolsExtension() : f => f
         )
     );

@@ -33,8 +33,8 @@ function Html({ css, js, html, head, initialState }) {
                 <script dangerouslySetInnerHTML={{
                     __html: `window.process = {
                         env: {
-                            BROWSER: true,
-                            REDUX_LOGGER: ${process.env.REDUX_LOGGER},
+                            BROWSER: 'true',
+                            REDUX_LOGGER: '${process.env.REDUX_LOGGER}',
                             API_ENDPOINT: '${process.env.API_ENDPOINT}'
                         }
                     }`
