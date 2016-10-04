@@ -21,13 +21,15 @@ $ npm start
 - Scalable unit testing via [Jest](https://github.com/facebook/jest)
 - Development and release builds with [Webpack](https://github.com/webpack/webpack)
 - State management with [Redux](https://github.com/reactjs/redux)
-- ...Just four commands to grok
+- ...Just 4 commands
 
 ## Commands
 
 ### `npm start`
 
 Serves the app in development mode
+
+> NOTE: This is simply an alias for `npm run serve`.
 
 ### `npm test`
 
@@ -37,30 +39,19 @@ Runs unit tests
 
 Builds the app ready for release
 
-### `NODE_ENV=production npm run serve`
+### `WEBPACK_DEV_SERVER=false npm run serve`
 
-Serves the app in production mode
+Serves the app in release mode
 
 > NOTE: Requires you to first build the app with `npm run build`.
 
 ## Environment Variables
 
-Environment variables are, as you might expect, defined via Unix env vars.
+Environment variables are defined via Unix env vars and are documented in the [`./server/_env`](server/_env) file.
 
-> NOTE: To avoid the hassle of having to define env vars on your local machine during development we recommend you simply rename the [`./server/_env`](server/_env) file to `./server/.env` which, in the absence of a predefined `NODE_ENV`, will be read in instead.
+To avoid the hassle of having to define env vars on your local machine during development we recommend you simply rename the [`./server/_env`](server/_env) file to `./server/.env` which, in the absence of a predefined `NODE_ENV`, will be copied to your environment.
 
-| Name                | Description                                                                                                                                                                 | Server | Client |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|--------|
-| NODE_ENV            | Defines the Node environment                                                                                                                                                | Y      | N      |
-| PORT                | The port to listen on                                                                                                                                                       | Y      | N      |
-| DEBUG               | Comma delimited 'names' defining which [debug](https://github.com/visionmedia/debug) logs to show                                                                           | Y      | N      |
-| WEBPACK\_DEV_SERVER | Determines whether to run the server in production or development mode, i.e. Either serve static assets from `./dist` or dynamic assets using [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) | Y      | N      |
-| BROWSER_CACHE       | Any valid [ms](https://github.com/rauchg/ms.js) to define how long static assets should be cached for                                                                      | Y      | N      |
-| API_ENDPOINT        | The API endpoint used by the client. Notably this must be an *absolute* url to ensure it can be resolved when rendering on the server                                       | Y      | Y      |
-| REDUX_LOGGER        | Turns on [redux-logger](https://github.com/evgenyrodionov/redux-logger) middleware                                                                                                                                        | Y      | Y      |
-| BROWSER             | Determines whether the app is running in the browser or in node                                                                                                             | N      | Y      |
-
-> NOTE: Any of the environment variables can be made available to the client by explicitly declaring them in the [Html](src/components/html/Html.js) component. This is required to prevent accidentally leaking sensitive data to the client.
+> NOTE: Any of the environment variables can be made available to the client by explicitly declaring them in the root [Html](src/components/html/Html.js) component. This extra step is required to prevent accidentally leaking sensitive data to the client.
 
 ## License
 MIT
