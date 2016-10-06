@@ -4,8 +4,8 @@
   "description": "Production-ready boilerplate for building universal web apps with React and Redux",
   "scripts": {
     "start": "npm run serve",
+    "serve": "node -r ./server/environment ./server",
     "build": "node ./tasks/build",
-    "serve": "node ./server",
     "test": "jest"
   },
   "author": "",

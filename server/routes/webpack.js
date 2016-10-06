@@ -1,5 +1,7 @@
 'use strict';
 
+const debug = require('debug')('app');
+const colors = require('colors');
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
@@ -8,6 +10,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const config = require('../../tasks/build/webpack.config');
+
+debug(colors.yellow('Using webpack-dev-middleware'));
 
 const router = express.Router();
 const compiler = webpack(config);
