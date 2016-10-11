@@ -1,0 +1,7 @@
+exports[`components/lib/button/Button renders correctly 1`] = `
+<button
+  className="root"
+  onClick={[Function]}>
+  Hello Button.
+</button>
+`;

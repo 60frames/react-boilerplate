@@ -1,3 +1,4 @@
+import 'css-reset';
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import Button from 'components/lib/button/Button';
