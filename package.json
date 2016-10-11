@@ -6,7 +6,8 @@
     "start": "npm run serve",
     "serve": "node -r ./server/environment ./server",
     "build": "node ./tasks/build",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook -c ./tasks/storybook/ -p 6006"
   },
   "author": "",
   "license": "ISC",
@@ -49,7 +50,8 @@
     "webpack": "^1.12.15",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.13.0",
-    "webpack-hot-server-middleware": "~0.0.2"
+    "webpack-hot-server-middleware": "~0.0.2",
+    "@kadira/storybook": "^2.21.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.7.4",

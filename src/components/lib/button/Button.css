@@ -1,0 +1,10 @@
+.root {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    background: #fff;
+    background: linear-gradient(to bottom, rgb(255, 255, 255) 0%,rgb(219, 219, 219) 100%);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 16px;
+}
