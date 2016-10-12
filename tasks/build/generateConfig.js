@@ -209,10 +209,9 @@ function getPlugins(options) {
     }
 
     if (options.hot) {
-        plugins = plugins.concat([
-            new webpack.optimize.OccurenceOrderPlugin(),
-            new webpack.HotModuleReplacementPlugin()
-        ]);
+        plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+        plugins.push(new webpack.HotModuleReplacementPlugin());
+        plugins.push(new webpack.NoErrorsPlugin());
     }
 
     return plugins;
