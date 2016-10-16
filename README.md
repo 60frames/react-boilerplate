@@ -1,4 +1,4 @@
-# 60fram.es React Boilerplate
+# 60fram.es React Boilerplate [![Build Status](https://travis-ci.org/60frames/react-boilerplate.svg?branch=master)](https://travis-ci.org/60frames/react-boilerplate)
 
 Production-ready boilerplate for building *universal* web apps with [React](https://github.com/facebook/react) and [Redux](https://github.com/reactjs/redux)
 
