@@ -51,7 +51,9 @@ module.exports = function generateConfig(options) {
             // Prevents the `process.env` defined on the `window` in Html.js
             // from being re-defined inside modules by https://github.com/webpack/node-libs-browser
             process: false
-        }
+        },
+        // NOTE: This will become the default bahviour in Webpack 2.x
+        bail: true
     };
 
     if (options.publicPath) {

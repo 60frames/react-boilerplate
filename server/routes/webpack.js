@@ -13,10 +13,12 @@ const config = require('../../tasks/build/webpack.config');
 
 debug(colors.yellow('Using webpack-dev-middleware'));
 
+// Don't bail in dev server.
+config.forEach(c => c.bail = false);
+
 const router = express.Router();
 const compiler = webpack(config);
 compiler.apply(new FriendlyErrorsWebpackPlugin());
-
 router.use(webpackDevMiddleware(compiler, {
     quiet: true,
     publicPath: config[0].output.publicPath
