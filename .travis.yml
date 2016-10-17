@@ -6,3 +6,5 @@ cache:
     - node_modules
 sudo: false
 script: npm test && npm run build
+after_success:
+  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'

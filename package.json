@@ -6,7 +6,7 @@
     "start": "npm run serve",
     "serve": "node -r ./server/environment ./server",
     "build": "node ./tasks/build",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.5.0",
+    "coveralls": "^2.11.14",
     "css-loader": "^0.23.1",
     "dotenv": "^2.0.0",
     "errorhandler": "^1.4.3",
