@@ -1,5 +1,5 @@
-import fetch from 'isomorphic-fetch';
-import NetworkError from 'utils/NetworkError';
+import isomorphicFetch from 'isomorphic-fetch';
+import NetworkError from 'utils/networkerror/NetworkError';
 
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -35,7 +35,7 @@ function parseError(response) {
  * Wrapper around `window.fetch` to handle json parsing and offer a
  * consistent error interface.
  *
- * xhr('/Users')
+ * fetch('/Users')
  *     .then(json => {
  *         console.log('success', json);
  *     }, networkError => {
@@ -48,7 +48,7 @@ function parseError(response) {
  * @param  {Object} options https://developer.mozilla.org/en-US/docs/Web/API/GlobalFetch
  * @return {Promise}
  */
-function xhr(url, options = {}) {
+function fetch(url, options = {}) {
     options = Object.assign({
         headers: {
             'Accept': 'application/json',
@@ -56,9 +56,9 @@ function xhr(url, options = {}) {
         }
     }, options);
 
-    return fetch(url, options)
+    return isomorphicFetch(url, options)
         .then(checkStatus)
         .then(parseSuccess, parseError);
 }
 
-export default xhr;
+export default fetch;

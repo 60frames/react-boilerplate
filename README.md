@@ -1,4 +1,4 @@
-# 60fram.es React Boilerplate [![Build Status](https://travis-ci.org/60frames/react-boilerplate.svg?branch=master)](https://travis-ci.org/60frames/react-boilerplate)
+# 60fram.es React Boilerplate [![Build Status](https://travis-ci.org/60frames/react-boilerplate.svg?branch=master)](https://travis-ci.org/60frames/react-boilerplate) [![Coverage Status](https://coveralls.io/repos/github/60frames/react-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/60frames/react-boilerplate?branch=master)
 
 Production-ready boilerplate for building *universal* web apps with [React](https://github.com/facebook/react) and [Redux](https://github.com/reactjs/redux)
 

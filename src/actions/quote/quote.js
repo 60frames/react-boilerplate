@@ -1,4 +1,4 @@
-import fetch from 'utils/fetch';
+import fetch from 'utils/fetch/fetch';
 
 export const FETCH_QUOTE_REQUEST = 'FETCH_QUOTE_REQUEST';
 export const FETCH_QUOTE_SUCCESS = 'FETCH_QUOTE_SUCCESS';
