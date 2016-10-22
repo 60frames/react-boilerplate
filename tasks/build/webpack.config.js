@@ -6,7 +6,7 @@ module.exports = [
     generateConfig({
         name: 'client',
         debug: true,
-        sourceMaps: true,
+        sourceMaps: 'eval',
         stats: true,
         hot: true,
         // TODO: Remove the need for `publicPath` once the style / css loader
@@ -20,6 +20,6 @@ module.exports = [
         name: 'server',
         debug: true,
         node: true,
-        sourceMaps: true
+        sourceMaps: 'eval'
     })
 ];
