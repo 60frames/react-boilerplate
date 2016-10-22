@@ -102,10 +102,10 @@ function getLoaders(options) {
     ];
 
     if (options.optimize) {
-        // Strip out all `logger` and `console` statements.
+        // Strip out all `console` statements.
         loaders.push({
             test: /\.js$/,
-            loader: 'strip-loader?strip[]=logger.*&strip[]=console.*'
+            loader: 'strip-loader?strip[]=console.*'
         });
     }
 
