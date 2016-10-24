@@ -17,9 +17,10 @@ module.exports = [
         publicPath: 'http://localhost:6060/'
     }),
     generateConfig({
-        name: 'server',
+        name: 'serverrouter',
         debug: true,
         node: true,
-        sourceMaps: 'eval'
+        sourceMaps: 'eval',
+        hot: true
     })
 ];

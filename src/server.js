@@ -54,8 +54,8 @@ function getCssFromStats(stats) {
 }
 
 function render(stats, renderProps, store) {
-    const js = getJsFromStats(stats);
-    const css = getCssFromStats(stats);
+    const js = ''; // getJsFromStats(stats);
+    const css = ''; // getCssFromStats(stats);
 
     const markup = renderToString(
         <Provider store={store}>

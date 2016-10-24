@@ -76,8 +76,12 @@ module.exports = function generateConfig(options) {
     }
 
     if (options.hot) {
-        config.entry[options.name].unshift('webpack-hot-middleware/client');
-        config.entry[options.name].unshift('react-hot-loader/patch');
+        if (options.node) {
+            config.entry[options.name].unshift('webpack/hot/poll?1000');
+        } else {
+            config.entry[options.name].unshift('webpack-hot-middleware/client');
+            config.entry[options.name].unshift('react-hot-loader/patch');
+        }
     }
 
     return config;

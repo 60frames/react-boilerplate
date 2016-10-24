@@ -14,7 +14,9 @@ app.use(compression());
 app.use('/api', api);
 
 if (process.env.WEBPACK_DEV_SERVER === 'true') {
-    app.use(require('./routes/webpack'));
+    const middleware = require('../dist/serverrouter').default;
+    app.use(middleware);
+    // app.use(require('../routes/webpack'));
 } else {
     app.use(require('./routes/static'));
 }
