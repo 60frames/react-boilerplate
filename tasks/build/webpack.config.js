@@ -20,6 +20,7 @@ module.exports = [
         name: 'server',
         debug: true,
         node: true,
-        sourceMaps: 'eval'
+        sourceMaps: 'eval',
+        disableCodeSplitting: true
     })
 ];

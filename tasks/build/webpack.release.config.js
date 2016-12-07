@@ -13,6 +13,7 @@ module.exports = [
     generateConfig({
         name: 'server',
         node: true,
-        optimize: true
+        optimize: true,
+        disableCodeSplitting: true
     })
 ];

@@ -203,8 +203,7 @@ function getPlugins(options) {
         }));
     }
 
-    if (!options.disableCodeSplitting) {
-        // Disable code splitting by limiting the number of chunks to 1.
+    if (options.disableCodeSplitting) {
         plugins.push(new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1
         }));
