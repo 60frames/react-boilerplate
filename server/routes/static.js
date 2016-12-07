@@ -5,15 +5,15 @@ const path = require('path');
 const ms = require('ms');
 
 const DIST_DIR = path.join(__dirname, '../../dist');
-const UNIVERSAL_RENDERER_PATH = path.join(DIST_DIR, 'server.js');
+const SERVER_RENDERER_PATH = path.join(DIST_DIR, 'server.js');
 const CLIENT_STATS_PATH = path.join(DIST_DIR, 'stats.json');
 const router = express.Router();
 
-let universalRenderer;
+let serverRenderer;
 let stats;
 
 try {
-    universalRenderer = require(UNIVERSAL_RENDERER_PATH).default;
+    serverRenderer = require(SERVER_RENDERER_PATH).default;
 } catch (ex) {
     throw new Error('Server bundle not found. Try running `npm run build`');
 }
@@ -28,6 +28,6 @@ router.use(express.static(DIST_DIR, {
     maxAge: ms(process.env.BROWSER_CACHE || 0)
 }));
 
-router.use(universalRenderer(stats));
+router.use(serverRenderer(stats));
 
 module.exports = router;
