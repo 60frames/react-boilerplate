@@ -68,13 +68,7 @@ exports[`components/html/Html renders correctly 1`] = `
     <script
       dangerouslySetInnerHTML={
         Object {
-          "__html": "window.process = {
-                                env: {
-                                    BROWSER: \'true\',
-                                    REDUX_LOGGER: \'undefined\',
-                                    API_ENDPOINT: \'undefined\'
-                                }
-                            }",
+          "__html": "window.process = {\"env\":{\"BROWSER\":\"true\",\"REDUX_LOGGER\":\"true\",\"API_ENDPOINT\":\"http:\\u002F\\u002Flocalhost:6060\\u002Fapi\"}}",
         }
       } />
     <script

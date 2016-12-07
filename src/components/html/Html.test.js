@@ -7,6 +7,8 @@ import Html from 'components/html/Html';
 describe('components/html/Html', () => {
 
     it('renders correctly', () => {
+        process.env.API_ENDPOINT = 'http://localhost:6060/api';
+        process.env.REDUX_LOGGER = 'true';
         const component = renderer.create(
             <Html
                 css="https://60fram.es/bundle.css"
