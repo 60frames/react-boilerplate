@@ -9,6 +9,7 @@ $ git clone https://github.com/60frames/react-boilerplate.git
 $ cd react-boilerplate
 $ rm -r .git
 $ cp ./server/_env ./server/.env
+$ npm install
 $ npm start
 ```
 
