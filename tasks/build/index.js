@@ -5,7 +5,7 @@ const async = require('async');
 const fs = require('fs-extra');
 const webpack = require('webpack');
 const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin');
-const config = require('./webpack.release.config');
+const config = require('./webpackReleaseConfig');
 
 const SRC_DIR = config[0].context;
 const DIST_DIR = config[0].output.path;

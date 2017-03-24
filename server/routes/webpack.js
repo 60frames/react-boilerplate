@@ -9,7 +9,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const config = require('../../tasks/build/webpack.config');
+const config = require('../../tasks/build/webpackConfig');
 
 debug(colors.yellow('Using webpack-dev-middleware'));
 

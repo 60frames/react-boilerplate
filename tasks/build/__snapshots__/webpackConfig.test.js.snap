@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tasks/build/webpackConfig client config has not regressed 1`] = `
+Object {
+  "bail": true,
+  "context": "<rootDir>/src",
+  "debug": true,
+  "devtool": "eval",
+  "entry": Object {
+    "client": Array [
+      "react-hot-loader/patch",
+      "webpack-hot-middleware/client",
+      "./client",
+    ],
+  },
+  "module": Object {
+    "loaders": Array [
+      Object {
+        "exclude": /node_modules/,
+        "loader": "babel-loader",
+        "test": /\\\\\\.js\\$/,
+      },
+      Object {
+        "loader": "exports-loader?window.Modernizr",
+        "test": /modernizr\\.js\\$/,
+      },
+      Object {
+        "loader": "url-loader?limit=10000",
+        "test": /\\\\\\.\\(jpe\\?g\\|png\\|gif\\|svg\\|woff\\|ttf\\|eot\\)\\$/i,
+      },
+      Object {
+        "loader": "json-loader",
+        "test": /\\\\\\.json\\$/,
+      },
+      Object {
+        "include": /node_modules/,
+        "loader": "style-loader!css-loader?sourceMap",
+        "test": /\\\\\\.css\\$/,
+      },
+      Object {
+        "exclude": /node_modules/,
+        "loader": "style-loader!css-loader?modules&localIdentName=[name]_[local]_[hash:base64:5]&sourceMap!autoprefixer-loader",
+        "test": /\\\\\\.css\\$/,
+      },
+    ],
+  },
+  "name": "client",
+  "node": Object {
+    "process": false,
+  },
+  "output": Object {
+    "filename": "[name].js",
+    "path": "<rootDir>/dist",
+    "publicPath": "http://localhost:6060/",
+  },
+  "plugins": Array [
+    StatsPlugin {
+      "cache": Object {},
+      "options": Object {
+        "chunkModules": true,
+      },
+      "output": "stats.json",
+    },
+    OccurrenceOrderPlugin {
+      "preferEntry": undefined,
+    },
+    HotModuleReplacementPlugin {},
+    NoErrorsPlugin {},
+  ],
+  "resolve": Object {
+    "root": Array [
+      "<rootDir>/src",
+    ],
+  },
+  "target": "web",
+}
+`;
+
+exports[`tasks/build/webpackConfig server config has not regressed 1`] = `
+Object {
+  "bail": true,
+  "context": "<rootDir>/src",
+  "debug": true,
+  "devtool": "eval",
+  "entry": Object {
+    "server": Array [
+      "./server",
+    ],
+  },
+  "module": Object {
+    "loaders": Array [
+      Object {
+        "exclude": /node_modules/,
+        "loader": "babel-loader",
+        "test": /\\\\\\.js\\$/,
+      },
+      Object {
+        "loader": "exports-loader?window.Modernizr",
+        "test": /modernizr\\.js\\$/,
+      },
+      Object {
+        "loader": "url-loader?limit=10000",
+        "test": /\\\\\\.\\(jpe\\?g\\|png\\|gif\\|svg\\|woff\\|ttf\\|eot\\)\\$/i,
+      },
+      Object {
+        "loader": "json-loader",
+        "test": /\\\\\\.json\\$/,
+      },
+      Object {
+        "include": /node_modules/,
+        "loader": "css-loader/locals?sourceMap",
+        "test": /\\\\\\.css\\$/,
+      },
+      Object {
+        "exclude": /node_modules/,
+        "loader": "css-loader/locals?modules&localIdentName=[name]_[local]_[hash:base64:5]&sourceMap",
+        "test": /\\\\\\.css\\$/,
+      },
+    ],
+  },
+  "name": "server",
+  "node": Object {
+    "process": false,
+  },
+  "output": Object {
+    "filename": "[name].js",
+    "libraryTarget": "commonjs2",
+    "path": "<rootDir>/dist",
+  },
+  "plugins": Array [
+    LimitChunkCountPlugin {
+      "options": Object {
+        "maxChunks": 1,
+      },
+    },
+  ],
+  "resolve": Object {
+    "root": Array [
+      "<rootDir>/src",
+    ],
+  },
+  "target": "node",
+}
+`;
