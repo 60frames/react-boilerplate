@@ -1,84 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`components/html/Html renders correctly 1`] = `
 <html
-  lang="en">
+  lang="en"
+>
   <head>
     <meta
-      charSet="utf-8" />
+      charSet="utf-8"
+    />
     <meta
       content="ie=edge,chrome=1"
-      httpEquiv="x-ua-compatible" />
-    <title>title</title>
-    <meta />
+      httpEquiv="x-ua-compatible"
+    />
+    &lt;title&gt;title&lt;/title&gt;
+    &lt;meta /&gt;
     <meta
       content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
-      name="viewport" />
+      name="viewport"
+    />
     <meta
       content="yes"
-      name="apple-mobile-web-app-capable" />
+      name="apple-mobile-web-app-capable"
+    />
     <meta
       content="no"
-      name="msapplication-tap-highlight" />
+      name="msapplication-tap-highlight"
+    />
     <link
       href="/apple-touch-icon.png"
       rel="apple-touch-icon"
-      sizes="180x180" />
+      sizes="180x180"
+    />
     <link
       href="/favicon-32x32.png"
       rel="icon"
       sizes="32x32"
-      type="image/png" />
+      type="image/png"
+    />
     <link
       href="/favicon-16x16.png"
       rel="icon"
       sizes="16x16"
-      type="image/png" />
+      type="image/png"
+    />
     <link
       href="/manifest.json"
-      rel="manifest" />
+      rel="manifest"
+    />
     <link
       color="#5bbad5"
       href="/safari-pinned-tab.svg"
-      rel="mask-icon" />
+      rel="mask-icon"
+    />
     <meta
       content="60fram.es"
-      name="apple-mobile-web-app-title" />
+      name="apple-mobile-web-app-title"
+    />
     <meta
       content="60fram.es"
-      name="application-name" />
+      name="application-name"
+    />
     <meta
       content="#ffffff"
-      name="theme-color" />
-    <link />
+      name="theme-color"
+    />
+    &lt;link /&gt;
     <link
       href="https://60fram.es/bundle.css"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div
       dangerouslySetInnerHTML={
         Object {
           "__html": "
-                            <div id=\"root\">
+                            <div id=\\"root\\">
                                 Hello World.
                             </div>
                         ",
         }
       }
-      id="root" />
+      id="root"
+    />
     <script
       dangerouslySetInnerHTML={
         Object {
-          "__html": "window.process = {\"env\":{\"BROWSER\":\"true\",\"REDUX_LOGGER\":\"true\",\"API_ENDPOINT\":\"http:\\u002F\\u002Flocalhost:6060\\u002Fapi\"}}",
+          "__html": "window.process = {\\"env\\":{\\"BROWSER\\":\\"true\\",\\"REDUX_LOGGER\\":\\"true\\",\\"API_ENDPOINT\\":\\"http:\\\\u002F\\\\u002Flocalhost:6060\\\\u002Fapi\\"}}",
         }
-      } />
+      }
+    />
     <script
       dangerouslySetInnerHTML={
         Object {
-          "__html": "window.__INITIAL_STATE__ = {\"initial\":\"state\"}",
+          "__html": "window.__INITIAL_STATE__ = {\\"initial\\":\\"state\\"}",
         }
-      } />
+      }
+    />
     <script
-      src="https://60fram.es/bundle.js" />
+      src="https://60fram.es/bundle.js"
+    />
   </body>
 </html>
 `;

@@ -1,15 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`components/app/App renders correctly 1`] = `
 <div
-  className="root">
+  className="root"
+>
   <Helmet
     defaultTitle="60fram.es React Boilerplate"
-    titleTemplate="%s | 60fram.es React Boilerplate" />
+    titleTemplate="%s | 60fram.es React Boilerplate"
+  />
   <div
-    className="logo">
+    className="logo"
+  >
     <Link
       className="logoContent"
       title="Home"
-      to="/">
+      to="/"
+    >
       60fram.es
     </Link>
   </div>

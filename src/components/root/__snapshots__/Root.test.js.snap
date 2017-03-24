@@ -1,16 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`components/root/Root renders correctly 1`] = `
 <Provider
   store={
     Object {
       "store": "store",
     }
-  }>
+  }
+>
   <Router
     history={
       Object {
         "history": "history",
       }
     }
-    routes="routes" />
+    routes="routes"
+  />
 </Provider>
 `;
