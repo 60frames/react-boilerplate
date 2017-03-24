@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
+import logger from 'redux-logger';
 import rootReducer from 'reducers';
 
 const middleware = [
@@ -8,7 +8,7 @@ const middleware = [
 ];
 
 if (process.env.BROWSER === 'true' && process.env.REDUX_LOGGER === 'true') {
-    middleware.push(createLogger());
+    middleware.push(logger);
 }
 
 export default function configureStore(initialState) {

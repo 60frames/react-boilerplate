@@ -101,14 +101,6 @@ function getLoaders(options) {
         }
     ];
 
-    if (options.optimize) {
-        // Strip out all `console` statements.
-        loaders.push({
-            test: /\.js$/,
-            loader: 'strip-loader?strip[]=console.*'
-        });
-    }
-
     loaders = loaders.concat(getCssLoaders(options));
 
     return loaders;
