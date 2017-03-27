@@ -13,7 +13,7 @@
   "devDependencies": {
     "60frames-coding-standards": "^1.0.7",
     "async": "^2.1.5",
-    "autoprefixer-loader": "^3.2.0",
+    "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.0",
     "babel-jest": "^19.0.0",
     "babel-loader": "^6.4.1",
@@ -26,9 +26,7 @@
     "errorhandler": "^1.4.3",
     "eslint": "^0.24.1",
     "eslint-plugin-react": "^2.6.4",
-    "exports-loader": "^0.6.4",
-    "expose-loader": "^0.7.3",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "fs-extra": "^2.1.2",
@@ -36,20 +34,20 @@
     "imports-loader": "^0.7.1",
     "jest": "^19.0.2",
     "json-loader": "^0.5.4",
+    "postcss-loader": "^1.3.3",
     "progress-bar-webpack-plugin": "^1.9.3",
     "react": "^15.4.2",
     "react-hot-loader": "^3.0.0-beta.1",
     "react-test-renderer": "^15.4.2",
     "redux-mock-store": "^1.2.2",
     "require-from-string": "^1.1.0",
-    "simple-define-webpack-plugin": "richardscarrott/simple-define-webpack-plugin.git#master",
     "stats-webpack-plugin": "^0.5.0",
     "style-loader": "^0.16.0",
     "url-loader": "^0.5.8",
-    "webpack": "^1.12.15",
+    "webpack": "^2.3.2",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-hot-middleware": "^2.17.1",
-    "webpack-hot-server-middleware": "~0.0.2"
+    "webpack-hot-server-middleware": "~0.0.5"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
@@ -78,6 +76,13 @@
     ],
     "moduleNameMapper": {
       "^.+\\.css$": "<rootDir>/test/styleMock.js"
-    }
-  }
+    },
+    "testEnvironment": "node"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "not ie < 9"
+  ]
 }

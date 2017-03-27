@@ -1,13 +1,16 @@
-import { rootDirname } from '../../root';
-import webpackConfig from './webpackReleaseConfig';
-import webpackConfigSnapshotSerializr from '../../test/webpackConfigSnapshotSerializer';
+/* eslint-env jest */
+
+const webpackReleaseConfig = require('./webpackReleaseConfig');
+const webpackConfigSnapshotSerializer = require('../../test/webpackConfigSnapshotSerializer').default;
 
 describe('tasks/build/webpackReleaseConfig', () => {
-    expect.addSnapshotSerializer(webpackConfigSnapshotSerializr);
+    expect.addSnapshotSerializer(webpackConfigSnapshotSerializer);
 
     describe('client config', () => {
         it('has not regressed', () => {
-            const config = webpackConfig.find(config => config.name === 'client');
+            const config = webpackReleaseConfig.find(
+                config => config.name === 'client'
+            );
             expect(config).toBeDefined();
             expect({
                 __webpack_config__: config
@@ -17,11 +20,13 @@ describe('tasks/build/webpackReleaseConfig', () => {
 
     describe('server config', () => {
         it('has not regressed', () => {
-            const config = webpackConfig.find(config => config.name === 'server');
+            const config = webpackReleaseConfig.find(
+                config => config.name === 'server'
+            );
             expect(config).toBeDefined();
             delete config.externals; // Reduce noise from node_modules
             expect({
-                __webpack_config__: config,
+                __webpack_config__: config
             }).toMatchSnapshot();
         });
     });

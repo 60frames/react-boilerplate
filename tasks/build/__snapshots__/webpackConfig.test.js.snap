@@ -4,7 +4,6 @@ exports[`tasks/build/webpackConfig client config has not regressed 1`] = `
 Object {
   "bail": true,
   "context": "<rootDir>/src",
-  "debug": true,
   "devtool": "eval",
   "entry": Object {
     "client": Array [
@@ -13,34 +12,112 @@ Object {
       "./client",
     ],
   },
+  "externals": Object {},
   "module": Object {
-    "loaders": Array [
+    "rules": Array [
       Object {
-        "exclude": /node_modules/,
+        "include": "<rootDir>/src",
         "loader": "babel-loader",
+        "options": Object {
+          "cacheDirectory": true,
+        },
         "test": /\\\\\\.js\\$/,
       },
       Object {
-        "loader": "exports-loader?window.Modernizr",
-        "test": /modernizr\\.js\\$/,
-      },
-      Object {
-        "loader": "url-loader?limit=10000",
-        "test": /\\\\\\.\\(jpe\\?g\\|png\\|gif\\|svg\\|woff\\|ttf\\|eot\\)\\$/i,
-      },
-      Object {
-        "loader": "json-loader",
-        "test": /\\\\\\.json\\$/,
-      },
-      Object {
         "include": /node_modules/,
-        "loader": "style-loader!css-loader?sourceMap",
         "test": /\\\\\\.css\\$/,
+        "use": Array [
+          Object {
+            "loader": "<rootDir>/node_modules/extract-text-webpack-plugin/loader.js",
+            "options": Object {
+              "omit": 1,
+              "remove": true,
+            },
+          },
+          Object {
+            "loader": "style-loader",
+          },
+          Object {
+            "loader": "css-loader",
+            "options": Object {
+              "localIdentName": "[name]_[local]_[hash:base64:5]",
+              "minimize": false,
+              "modules": false,
+              "sourceMap": true,
+            },
+          },
+          Object {
+            "loader": "postcss-loader",
+            "options": Object {
+              "ident": "postcss",
+              "plugins": [Function],
+            },
+          },
+        ],
       },
       Object {
-        "exclude": /node_modules/,
-        "loader": "style-loader!css-loader?modules&localIdentName=[name]_[local]_[hash:base64:5]&sourceMap!autoprefixer-loader",
+        "include": "<rootDir>/src",
         "test": /\\\\\\.css\\$/,
+        "use": Array [
+          Object {
+            "loader": "<rootDir>/node_modules/extract-text-webpack-plugin/loader.js",
+            "options": Object {
+              "omit": 1,
+              "remove": true,
+            },
+          },
+          Object {
+            "loader": "style-loader",
+          },
+          Object {
+            "loader": "css-loader",
+            "options": Object {
+              "localIdentName": "[name]_[local]_[hash:base64:5]",
+              "minimize": false,
+              "modules": true,
+              "sourceMap": true,
+            },
+          },
+          Object {
+            "loader": "postcss-loader",
+            "options": Object {
+              "ident": "postcss",
+              "plugins": [Function],
+            },
+          },
+        ],
+      },
+      Object {
+        "include": "<rootDir>/src",
+        "loader": "url-loader",
+        "options": Object {
+          "limit": 10000,
+        },
+        "test": /\\\\\\.\\(eot\\|ttf\\|woff\\|woff2\\)\\(\\\\\\?\\.\\*\\)\\?\\$/,
+      },
+      Object {
+        "include": "<rootDir>/src",
+        "loader": "url-loader",
+        "options": Object {
+          "limit": 10000,
+        },
+        "test": /\\\\\\.\\(gif\\|ico\\|jpg\\|jpeg\\|png\\|svg\\|webp\\)\\$/,
+      },
+      Object {
+        "include": "<rootDir>/src",
+        "loader": "url-loader",
+        "options": Object {
+          "limit": 10000,
+        },
+        "test": /\\\\\\.\\(mp4\\|webm\\)\\$/,
+      },
+      Object {
+        "include": "<rootDir>/src",
+        "loader": "url-loader",
+        "options": Object {
+          "limit": 10000,
+        },
+        "test": /\\\\\\.\\(aac\\|m4a\\|mp3\\|oga\\|ogg\\|wav\\)\\$/,
       },
     ],
   },
@@ -50,10 +127,19 @@ Object {
   },
   "output": Object {
     "filename": "[name].js",
+    "libraryTarget": "var",
     "path": "<rootDir>/dist",
     "publicPath": "http://localhost:6060/",
   },
   "plugins": Array [
+    ExtractTextPlugin {
+      "filename": "[name].css",
+      "id": 1,
+      "options": Object {
+        "allChunks": true,
+        "disable": true,
+      },
+    },
     StatsPlugin {
       "cache": Object {},
       "options": Object {
@@ -61,15 +147,16 @@ Object {
       },
       "output": "stats.json",
     },
-    OccurrenceOrderPlugin {
-      "preferEntry": undefined,
+    HotModuleReplacementPlugin {
+      "fullBuildTimeout": 200,
+      "multiStep": undefined,
     },
-    HotModuleReplacementPlugin {},
-    NoErrorsPlugin {},
+    NoEmitOnErrorsPlugin {},
   ],
   "resolve": Object {
-    "root": Array [
+    "modules": Array [
       "<rootDir>/src",
+      "node_modules",
     ],
   },
   "target": "web",
@@ -80,41 +167,81 @@ exports[`tasks/build/webpackConfig server config has not regressed 1`] = `
 Object {
   "bail": true,
   "context": "<rootDir>/src",
-  "debug": true,
   "devtool": "eval",
   "entry": Object {
-    "server": Array [
-      "./server",
-    ],
+    "server": "./server",
   },
   "module": Object {
-    "loaders": Array [
+    "rules": Array [
       Object {
-        "exclude": /node_modules/,
+        "include": "<rootDir>/src",
         "loader": "babel-loader",
+        "options": Object {
+          "cacheDirectory": true,
+        },
         "test": /\\\\\\.js\\$/,
       },
       Object {
-        "loader": "exports-loader?window.Modernizr",
-        "test": /modernizr\\.js\\$/,
-      },
-      Object {
-        "loader": "url-loader?limit=10000",
-        "test": /\\\\\\.\\(jpe\\?g\\|png\\|gif\\|svg\\|woff\\|ttf\\|eot\\)\\$/i,
-      },
-      Object {
-        "loader": "json-loader",
-        "test": /\\\\\\.json\\$/,
-      },
-      Object {
         "include": /node_modules/,
-        "loader": "css-loader/locals?sourceMap",
         "test": /\\\\\\.css\\$/,
+        "use": Array [
+          Object {
+            "loader": "css-loader/locals",
+            "options": Object {
+              "localIdentName": "[name]_[local]_[hash:base64:5]",
+              "minimize": false,
+              "modules": false,
+              "sourceMap": true,
+            },
+          },
+        ],
       },
       Object {
-        "exclude": /node_modules/,
-        "loader": "css-loader/locals?modules&localIdentName=[name]_[local]_[hash:base64:5]&sourceMap",
+        "include": "<rootDir>/src",
         "test": /\\\\\\.css\\$/,
+        "use": Array [
+          Object {
+            "loader": "css-loader/locals",
+            "options": Object {
+              "localIdentName": "[name]_[local]_[hash:base64:5]",
+              "minimize": false,
+              "modules": true,
+              "sourceMap": true,
+            },
+          },
+        ],
+      },
+      Object {
+        "include": "<rootDir>/src",
+        "loader": "url-loader",
+        "options": Object {
+          "limit": 10000,
+        },
+        "test": /\\\\\\.\\(eot\\|ttf\\|woff\\|woff2\\)\\(\\\\\\?\\.\\*\\)\\?\\$/,
+      },
+      Object {
+        "include": "<rootDir>/src",
+        "loader": "url-loader",
+        "options": Object {
+          "limit": 10000,
+        },
+        "test": /\\\\\\.\\(gif\\|ico\\|jpg\\|jpeg\\|png\\|svg\\|webp\\)\\$/,
+      },
+      Object {
+        "include": "<rootDir>/src",
+        "loader": "url-loader",
+        "options": Object {
+          "limit": 10000,
+        },
+        "test": /\\\\\\.\\(mp4\\|webm\\)\\$/,
+      },
+      Object {
+        "include": "<rootDir>/src",
+        "loader": "url-loader",
+        "options": Object {
+          "limit": 10000,
+        },
+        "test": /\\\\\\.\\(aac\\|m4a\\|mp3\\|oga\\|ogg\\|wav\\)\\$/,
       },
     ],
   },
@@ -126,8 +253,17 @@ Object {
     "filename": "[name].js",
     "libraryTarget": "commonjs2",
     "path": "<rootDir>/dist",
+    "publicPath": "",
   },
   "plugins": Array [
+    ExtractTextPlugin {
+      "filename": "[name].css",
+      "id": 2,
+      "options": Object {
+        "allChunks": true,
+        "disable": true,
+      },
+    },
     LimitChunkCountPlugin {
       "options": Object {
         "maxChunks": 1,
@@ -135,8 +271,9 @@ Object {
     },
   ],
   "resolve": Object {
-    "root": Array [
+    "modules": Array [
       "<rootDir>/src",
+      "node_modules",
     ],
   },
   "target": "node",

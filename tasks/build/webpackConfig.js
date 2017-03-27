@@ -1,12 +1,11 @@
 'use strict';
 
-const generateConfig = require('./generateConfig');
+const createConfig = require('./createConfig');
 
 module.exports = [
-    generateConfig({
+    createConfig({
         name: 'client',
-        debug: true,
-        sourceMaps: 'eval',
+        sourceMap: 'eval',
         stats: true,
         hot: true,
         // TODO: Remove the need for `publicPath` once the style / css loader
@@ -16,11 +15,10 @@ module.exports = [
         // https://github.com/webpack/style-loader/issues/55
         publicPath: 'http://localhost:6060/'
     }),
-    generateConfig({
+    createConfig({
         name: 'server',
-        debug: true,
         node: true,
-        sourceMaps: 'eval',
-        disableCodeSplitting: true
+        sourceMap: 'eval',
+        codeSplitting: false
     })
 ];

@@ -1,19 +1,19 @@
 'use strict';
 
-const generateConfig = require('./generateConfig');
+const createConfig = require('./createConfig');
 
 module.exports = [
-    generateConfig({
+    createConfig({
         name: 'client',
         optimize: true,
         revision: true,
         extractCss: true,
         stats: true
     }),
-    generateConfig({
+    createConfig({
         name: 'server',
         node: true,
         optimize: true,
-        disableCodeSplitting: true
+        codeSplitting: false
     })
 ];

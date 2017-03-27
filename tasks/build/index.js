@@ -48,16 +48,16 @@ function build(done) {
     });
 }
 
-async.series([
-    clean,
-    done => {
-        async.parallel([
-            copy,
-            build
-        ], done);
+async.series(
+    [
+        clean,
+        done => {
+            async.parallel([copy, build], done);
+        }
+    ],
+    err => {
+        if (err) {
+            throw err;
+        }
     }
-], err => {
-    if (err) {
-        throw err;
-    }
-});
+);

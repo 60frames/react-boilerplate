@@ -20,7 +20,7 @@ $ npm start
 - Hot reloading on both client and *server*
 - Locally scoped CSS with [CSS modules](https://github.com/css-modules)
 - Scalable unit testing via [Jest](https://github.com/facebook/jest)
-- Development and release builds with [Webpack](https://github.com/webpack/webpack)
+- Development and release builds with [Webpack 2](https://github.com/webpack/webpack)
 - State management with [Redux](https://github.com/reactjs/redux)
 - ...Just 4 commands
 
