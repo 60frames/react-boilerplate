@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
+import { createMemoryHistory, match, RouterContext } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import Helmet from 'react-helmet';
 import configureStore from 'store/configureStore';
@@ -90,16 +91,21 @@ export default stats => {
      * @return {undefined}  undefined
      */
     return (req, res, next) => {
+        const url = req.url;
+        const memoryHistory = createMemoryHistory(url);
+        const store = configureStore();
+        const history = syncHistoryWithStore(memoryHistory, store);
+
         match({
+            history,
             routes,
-            location: req.url
+            location: url
         }, (error, redirectLocation, renderProps) => {
             if (error) {
                 res.status(500).send(error.message);
             } else if (redirectLocation) {
                 res.redirect(302, `${redirectLocation.pathname}${redirectLocation.search}`);
             } else {
-                const store = configureStore();
                 fetchComponentData(renderProps, store)
                     .then(() => {
                         let html;
