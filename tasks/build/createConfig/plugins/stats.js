@@ -2,10 +2,10 @@
 
 const StatsWebpackPlugin = require('stats-webpack-plugin');
 
-module.exports = ({ stats }) => {
+module.exports = ({ stats, name }) => {
     if (stats) {
         return [
-            new StatsWebpackPlugin('stats.json', {
+            new StatsWebpackPlugin(`${name}-stats.json`, {
                 chunkModules: true
             })
         ];

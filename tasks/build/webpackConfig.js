@@ -19,6 +19,7 @@ module.exports = [
         name: 'server',
         node: true,
         sourceMap: 'eval',
-        codeSplitting: false
+        codeSplitting: false,
+        stats: true
     })
 ];

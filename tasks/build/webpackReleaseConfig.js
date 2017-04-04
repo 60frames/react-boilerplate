@@ -14,6 +14,7 @@ module.exports = [
         name: 'server',
         node: true,
         optimize: true,
-        codeSplitting: false
+        codeSplitting: false,
+        stats: true
     })
 ];

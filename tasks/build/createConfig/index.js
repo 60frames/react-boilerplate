@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const webpack = require('webpack');
 const javascript = require('./rules/javascript');
 const { css, cssModules } = require('./rules/css');
 const fonts = require('./rules/fonts');
@@ -70,6 +71,7 @@ module.exports = options => {
         output: {
             path: DIST_DIR,
             filename: revision ? '[name].[chunkhash].js' : '[name].js',
+            // chunkFilename: revision ? '[id].[chunkhash].js' : '[id].js',
             libraryTarget: node ? 'commonjs2' : 'var',
             publicPath
         },
@@ -96,18 +98,24 @@ module.exports = options => {
         ],
         devtool: sourceMap ? sourceMap : '',
         target: node ? 'node' : 'web',
-        externals: node
-            ? fs
-                  .readdirSync('node_modules')
-                  .filter(x => !x.includes('.bin'))
-                  .reduce(
-                      (externals, mod) => {
-                          externals[mod] = `commonjs ${mod}`;
-                          return externals;
-                      },
-                      {}
-                  )
-            : {},
+        // Not sure there's much point in moving node_modules to externals but
+        // basically, even when just preventing react-loadable, it runs incorrectly.
+        // as isWebpack is false.
+        //
+        // externals: node
+        //     ? fs
+        //           .readdirSync('node_modules')
+        //         //   .map((x) => {console.log('here', x.includes('react-loadable')); return x})
+        //           .filter(x => !x.includes('.bin') || x.includes('react-loadable'))
+        //         // .filter(x => !x.includes('.bin'))
+        //           .reduce(
+        //               (externals, mod) => {
+        //                   externals[mod] = `commonjs ${mod}`;
+        //                   return externals;
+        //               },
+        //               {}
+        //           )
+        //     : {},
         node: {
             // Prevents the `process.env` defined on the `window` in Html.js
             // from being re-defined inside modules by https://github.com/webpack/node-libs-browser

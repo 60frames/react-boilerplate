@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchQuoteIfNeeded } from 'actions/quote/quote';
+import Loader from 'components/lib/loader/Loader';
+import Error from 'components/lib/error/Error';
 import styles from 'components/index/Index.css';
 
 export class Index extends Component {
@@ -15,10 +17,10 @@ export class Index extends Component {
         return (
             <div className={styles.root}>
                 {isFetching ? (
-                    <p>Loading...</p>
+                    <Loader />
                 ) : null}
                 {error ? (
-                    <p>Error... {error}</p>
+                    <Error>{error}</Error>
                 ) : null}
                 {value ? (
                     <p>{value}</p>

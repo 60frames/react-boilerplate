@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import serialize from 'serialize-javascript';
 
-function Html({ css, js, html, head, initialState }) {
+function Html({ css, mainJs, chunkJs, html, head, initialState }) {
     return (
         <html lang="en">
             <head>
@@ -43,7 +43,9 @@ function Html({ css, js, html, head, initialState }) {
                 <script dangerouslySetInnerHTML={{
                     __html: `window.__INITIAL_STATE__ = ${serialize(initialState)}`
                 }} />
-                <script src={js}></script>
+                <script src="/bootstrap.js"></script>
+                {chunkJs.map(js => <script key={js} src={`/${js}`}></script>)}
+                <script src={`/${mainJs}`}></script>
             </body>
         </html>
     );
@@ -51,7 +53,7 @@ function Html({ css, js, html, head, initialState }) {
 
 Html.propTypes = {
     css: PropTypes.string,
-    js: PropTypes.string.isRequired,
+    // js: PropTypes.string.isRequired,
     html: PropTypes.string,
     head: PropTypes.object.isRequired,
     initialState: PropTypes.object.isRequired

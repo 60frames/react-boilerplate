@@ -7,6 +7,11 @@ import Helmet from 'react-helmet';
 import configureStore from 'store/configureStore';
 import routes, { NotFoundComponent } from 'routes';
 import Html from 'components/html/Html';
+import Loadable from 'components/lib/loadable/loadable';
+
+function flatten(arr) {
+    return [].concat.apply([], arr);
+}
 
 function fetchComponentData(renderProps, store) {
     const requests = renderProps.components
@@ -54,10 +59,35 @@ function getCssFromStats(stats) {
     return assets.find(asset => /\.css$/.test(asset));
 }
 
-function render(stats, renderProps, store) {
-    const js = getJsFromStats(stats);
-    const css = getCssFromStats(stats);
+function getChunksFromStats(clientStats, serverStats, moduleIds) {
+    // This is prob slow, should prob be built at start up.
+    console.time('getChunksFromStats');
+    const serverModulesById = serverStats.modules.reduce((modules, mod) => {
+        modules[mod.id] = mod;
+        return modules;
+    }, {});
+    const clientModulesByIdentifier = clientStats.modules.reduce((modules, mod) => {
+        modules[mod.identifier] = mod;
+        return modules;
+    }, {});
+    const chunkIds = flatten(moduleIds.map(id => {
+        const identifier = serverModulesById[id].identifier;
+        const clientModule = clientModulesByIdentifier[identifier];
+        return clientModule.chunks;
+    }));
+    const clientChunksById = clientStats.chunks.reduce((chunks, chunk) => {
+        chunks[chunk.id] = chunk;
+        return chunks;
+    }, {});
+    // Dedupe.
+    const r = flatten(chunkIds.map(id => {
+        return clientChunksById[id].files.filter(file => /\.js$/.test(file));
+    }));
+    console.timeEnd('getChunksFromStats');
+    return r;
+}
 
+function render(clientStats, serverStats, renderProps, store) {
     const markup = renderToString(
         <Provider store={store}>
             <RouterContext {...renderProps} />
@@ -65,10 +95,18 @@ function render(stats, renderProps, store) {
     );
 
     const head = Helmet.rewind();
+    const moduleIds = Loadable.flushModuleIds();
+
+    const js = getJsFromStats(clientStats);
+    const css = getCssFromStats(clientStats);
+
+    // Should prob be called from within `getJsFromStats`.
+    const chunkJs = getChunksFromStats(clientStats, serverStats, moduleIds);
 
     const html = renderToStaticMarkup(
         <Html
-            js={js && `/${js}`}
+            mainJs={js}
+            chunkJs={chunkJs}
             css={css && `/${css}`}
             html={markup}
             head={head}
@@ -83,7 +121,7 @@ function render(stats, renderProps, store) {
  * @param  {object}     stats Webpack stats output
  * @return {function}   middleware function
  */
-export default stats => {
+export default (clientStats, serverStats) => {
 
     /**
      * @param  {object}     req Express request object
@@ -110,7 +148,7 @@ export default stats => {
                     .then(() => {
                         let html;
                         try {
-                            html = render(stats, renderProps, store);
+                            html = render(clientStats, serverStats, renderProps, store);
                         } catch (ex) {
                             return next(ex);
                         }

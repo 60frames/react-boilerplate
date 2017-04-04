@@ -1,8 +1,11 @@
-import {
-    FETCH_QUOTE_REQUEST,
-    FETCH_QUOTE_SUCCESS,
-    FETCH_QUOTE_FAILURE
-} from 'actions/quote/quote';
+// This prevents action creator from being code split. Good reason to move
+// consts into separate module. Or, even better, use store.replaceReducer to
+// split reducers.
+// import {
+//     FETCH_QUOTE_REQUEST,
+//     FETCH_QUOTE_SUCCESS,
+//     FETCH_QUOTE_FAILURE
+// } from 'actions/quote/quote';
 
 function quote(state = {
     isFetching: false,
@@ -11,19 +14,19 @@ function quote(state = {
     value: ''
 }, action) {
     switch (action.type) {
-        case FETCH_QUOTE_REQUEST:
+        case 'FETCH_QUOTE_REQUEST':
             return {
                 ...state,
                 isFetching: true,
                 error: false
             };
-        case FETCH_QUOTE_SUCCESS:
+        case 'FETCH_QUOTE_SUCCESS':
             return {
                 ...state,
                 isFetching: false,
                 value: action.payload
             };
-        case FETCH_QUOTE_FAILURE:
+        case 'FETCH_QUOTE_FAILURE':
             return {
                 ...state,
                 isFetching: false,
