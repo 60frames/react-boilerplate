@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Loadable from 'react-loadable';
 
-let moduleIds = [];
+let moduleIds = new Set();
 
 /**
  * Wraps `Loadable` in order to support `flushServerSideRequires` (or a variation thereof)
@@ -12,7 +12,7 @@ const WrappedLoadable = options => {
     return class extends Component {
         constructor() {
             super();
-            moduleIds.push(options.webpackRequireWeakId());
+            moduleIds.add(options.webpackRequireWeakId());
         }
 
         render() {
@@ -22,8 +22,8 @@ const WrappedLoadable = options => {
 }
 
 WrappedLoadable.flushModuleIds = () => {
-    const ids = moduleIds;
-    moduleIds = [];
+    const ids = [...moduleIds];
+    moduleIds.clear();
     return ids;
 }
 
