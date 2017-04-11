@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import serialize from 'serialize-javascript';
 
-function Html({ css, mainJs, chunkJs, html, head, initialState }) {
+function Html({ js, css, html, head, initialState }) {
     return (
         <html lang="en">
             <head>
@@ -23,9 +23,7 @@ function Html({ css, mainJs, chunkJs, html, head, initialState }) {
                 <meta name="theme-color" content="#ffffff" />
 
                 {head.link.toComponent()}
-                {css ? (
-                    <link rel="stylesheet" href={css} />
-                ) : null}
+                {css.map(css => <link key={css} rel="stylesheet" href={`/${css}`} />)}
             </head>
             <body>
                 <div id="root" dangerouslySetInnerHTML={{
@@ -43,17 +41,15 @@ function Html({ css, mainJs, chunkJs, html, head, initialState }) {
                 <script dangerouslySetInnerHTML={{
                     __html: `window.__INITIAL_STATE__ = ${serialize(initialState)}`
                 }} />
-                <script src="/bootstrap.js"></script>
-                {chunkJs.map(js => <script key={js} src={`/${js}`}></script>)}
-                <script src={`/${mainJs}`}></script>
+                {js.map(js => <script key={js} src={`/${js}`}></script>)}
             </body>
         </html>
     );
 }
 
 Html.propTypes = {
-    css: PropTypes.string,
-    // js: PropTypes.string.isRequired,
+    js: PropTypes.array.isRequired,
+    css: PropTypes.array.isRequired,
     html: PropTypes.string,
     head: PropTypes.object.isRequired,
     initialState: PropTypes.object.isRequired

@@ -1,4 +1,5 @@
 import React from 'react';
+import { compose } from 'redux';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -13,10 +14,19 @@ function flatten(arr) {
     return [].concat.apply([], arr);
 }
 
+function uniq(arr) {
+    return [...new Set(arr)];
+}
+
+function isTruthy(val) {
+    return !!val;
+}
+
+const flattenUniq = compose(uniq, flatten);
+
 function fetchComponentData(renderProps, store) {
     const requests = renderProps.components
-        // filter undefined values
-        .filter(component => component)
+        .filter(isTruthy)
         .map(component => {
             // Handle `connect`ed components.
             if (component.WrappedComponent) {
@@ -43,77 +53,80 @@ function isNotFound(renderProps) {
         .some(component => component === NotFoundComponent);
 }
 
-function getJsFromStats(stats) {
-    let assets = stats.assetsByChunkName.client;
+function getJsByChunkName(name, { clientAssetsByChunkName }) {
+    let assets = clientAssetsByChunkName[name];
     if (!Array.isArray(assets)) {
         assets = [assets];
     }
     return assets.find(asset => /\.js$/.test(asset));
-}
+};
 
-function getCssFromStats(stats) {
-    let assets = stats.assetsByChunkName.client;
+function getCssByChunkName(name, { clientAssetsByChunkName }) {
+    let assets = clientAssetsByChunkName[name];
     if (!Array.isArray(assets)) {
         assets = [assets];
     }
     return assets.find(asset => /\.css$/.test(asset));
 }
 
-function getChunksFromStats(clientStats, serverStats, moduleIds) {
-    // This is prob slow, should prob be built at start up.
-    console.time('getChunksFromStats');
-    const serverModulesById = serverStats.modules.reduce((modules, mod) => {
-        modules[mod.id] = mod;
-        return modules;
-    }, {});
-    const clientModulesByIdentifier = clientStats.modules.reduce((modules, mod) => {
-        modules[mod.identifier] = mod;
-        return modules;
-    }, {});
+function getCodeSplitChunks({
+    serverModulesById,
+    clientModulesByIdentifier,
+    clientChunksById
+}, moduleIds) {
     const chunkIds = flatten(moduleIds.map(id => {
         const identifier = serverModulesById[id].identifier;
         const clientModule = clientModulesByIdentifier[identifier];
+        if (!clientModule) {
+            throw new Error(`${identifier} not found in client stats`);
+        }
         return clientModule.chunks;
     }));
-    const clientChunksById = clientStats.chunks.reduce((chunks, chunk) => {
-        chunks[chunk.id] = chunk;
-        return chunks;
-    }, {});
-    // Dedupe.
-    const r = flatten(chunkIds.map(id => {
-        return clientChunksById[id].files.filter(file => /\.js$/.test(file));
-    }));
-    console.timeEnd('getChunksFromStats');
-    return r;
+    // TODO: Test uniq is necessary here...
+    return flattenUniq(
+        chunkIds.map(id => {
+            // TODO: Check why filtering (source maps and css?)
+            // console.log(clientChunksById[id].files);
+            return clientChunksById[id].files.filter(file => /\.js$/.test(file));
+        })
+    );
 }
 
-function render(clientStats, serverStats, renderProps, store) {
+function getJs(stats, moduleIds) {
+    return [
+        getJsByChunkName('bootstrap', stats),
+        ...getCodeSplitChunks(stats, moduleIds),
+        getJsByChunkName('client', stats),
+    ].filter(isTruthy);
+}
+
+function getCss(stats) {
+    return [
+        getCssByChunkName('client', stats)
+    ].filter(isTruthy);
+}
+
+function render(renderProps, store, stats) {
     const markup = renderToString(
         <Provider store={store}>
             <RouterContext {...renderProps} />
         </Provider>
     );
-
     const head = Helmet.rewind();
     const moduleIds = Loadable.flushModuleIds();
+    const js = getJs(stats, moduleIds);
+    const css = getCss(stats);
+    const initialState = store.getState();
 
-    const js = getJsFromStats(clientStats);
-    const css = getCssFromStats(clientStats);
-
-    // Should prob be called from within `getJsFromStats`.
-    const chunkJs = getChunksFromStats(clientStats, serverStats, moduleIds);
-
-    const html = renderToStaticMarkup(
+    return renderToStaticMarkup(
         <Html
-            mainJs={js}
-            chunkJs={chunkJs}
-            css={css && `/${css}`}
+            js={js}
+            css={css}
             html={markup}
             head={head}
-            initialState={store.getState()} />
+            initialState={initialState}
+        />
     );
-
-    return html;
 }
 
 /**
@@ -122,6 +135,20 @@ function render(clientStats, serverStats, renderProps, store) {
  * @return {function}   middleware function
  */
 export default (clientStats, serverStats) => {
+    // Build stats maps for quicker lookups.
+    const serverModulesById = serverStats.modules.reduce((modules, mod) => {
+        modules[mod.id] = mod;
+        return modules;
+    }, {});
+    const clientModulesByIdentifier = clientStats.modules.reduce((modules, mod) => {
+        modules[mod.identifier] = mod;
+        return modules;
+    }, {});
+    const clientChunksById = clientStats.chunks.reduce((chunks, chunk) => {
+        chunks[chunk.id] = chunk;
+        return chunks;
+    }, {});
+    const clientAssetsByChunkName = clientStats.assetsByChunkName;
 
     /**
      * @param  {object}     req Express request object
@@ -148,7 +175,12 @@ export default (clientStats, serverStats) => {
                     .then(() => {
                         let html;
                         try {
-                            html = render(clientStats, serverStats, renderProps, store);
+                            html = render(renderProps, store, {
+                                serverModulesById,
+                                clientModulesByIdentifier,
+                                clientChunksById,
+                                clientAssetsByChunkName
+                            });
                         } catch (ex) {
                             return next(ex);
                         }

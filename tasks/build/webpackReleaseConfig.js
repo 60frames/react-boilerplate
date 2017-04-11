@@ -8,7 +8,8 @@ module.exports = [
         optimize: true,
         revision: true,
         extractCss: true,
-        stats: true
+        stats: true,
+        bootstrapChunk: true
     }),
     createConfig({
         name: 'server',
