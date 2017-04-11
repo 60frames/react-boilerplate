@@ -14,6 +14,7 @@ const optimize = require('./plugins/optimize');
 const stats = require('./plugins/stats');
 const hmr = require('./plugins/hmr');
 const codeSplitting = require('./plugins/codeSplitting');
+const vendorChunk = require('./plugins/vendorChunk');
 
 const SRC_DIR = path.join(__dirname, '../../../src');
 const DIST_DIR = path.join(__dirname, '../../../dist');
@@ -43,6 +44,7 @@ const DEFAULTS = {
  * @param {boolean}         options.stats          Output build stats.
  * @param {boolean}         options.codeSplitting  Disable split points by limiting max chunks to 1.
  * @param {string}          options.publicPath     The public path.
+ * @param {boolean}         options.bootstrapChunk Move Webpack bootstrap code into own chunk.
  */
 module.exports = options => {
     options = Object.assign({}, DEFAULTS, options);
@@ -94,7 +96,8 @@ module.exports = options => {
             ...optimize(options),
             ...stats(options),
             ...hmr(options),
-            ...codeSplitting(options)
+            ...codeSplitting(options),
+            ...vendorChunk(options),
         ],
         devtool: sourceMap ? sourceMap : '',
         target: node ? 'node' : 'web',

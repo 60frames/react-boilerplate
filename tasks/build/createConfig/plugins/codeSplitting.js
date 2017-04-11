@@ -15,23 +15,23 @@ module.exports = ({ codeSplitting, node }) => {
     } else if (!node) {
         // Move webpack bootstrap to separate chunk to allow split chunks
         // to be loaded *before* main.
-        plugins.push(
-            new webpack.optimize.CommonsChunkPlugin({
-                names: ['bootstrap'],
-                // TODO: Revision.
-                filename: '[name].js',
-                minChunks: Infinity,
-            })
-        );
+        // plugins.push(
+        //     new webpack.optimize.CommonsChunkPlugin({
+        //         names: ['bootstrap'],
+        //         // TODO: Revision.
+        //         filename: '[name].js',
+        //         minChunks: Infinity,
+        //     })
+        // );
     }
 
     if (node) {
         // Nope.
-        plugins.push(
-            new webpack.DefinePlugin({
-                '__dirname': '__dirname'
-            })
-        );
+        // plugins.push(
+        //     new webpack.DefinePlugin({
+        //         __dirname: '__dirname'
+        //     })
+        // );
     }
 
     return plugins;

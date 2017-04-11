@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchQuoteIfNeeded } from 'actions/quote/quote';
 import Loader from 'components/lib/loader/Loader';
 import Error from 'components/lib/error/Error';
+import DetailLoadable from 'components/detail/DetailLoadable';
 import styles from 'components/index/Index.css';
 
 export class Index extends Component {
@@ -16,6 +17,8 @@ export class Index extends Component {
         const { isFetching, error, value } = this.props;
         return (
             <div className={styles.root}>
+                <DetailLoadable />
+                <DetailLoadable />
                 {isFetching ? (
                     <Loader />
                 ) : null}

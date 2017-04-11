@@ -9,7 +9,9 @@ import Root from 'components/root/Root';
 import configureStore from 'store/configureStore';
 
 const store = configureStore(window.__INITIAL_STATE__);
-const history = syncHistoryWithStore(browserHistory, store);
+// const history = syncHistoryWithStore(browserHistory, store);
+
+console.log('THIS SHOULD NOT CHANGE THE VENDOR HASH');
 
 render(
     <AppContainer>

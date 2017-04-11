@@ -81,6 +81,7 @@ function getChunksFromStats(clientStats, serverStats, moduleIds) {
     }, {});
     // Dedupe.
     const r = flatten(chunkIds.map(id => {
+        // Looks like hot updates are being pulled in here too, e.g. 0.231jjh23hdsa12e32.hot-update.js
         return clientChunksById[id].files.filter(file => /\.js$/.test(file));
     }));
     console.timeEnd('getChunksFromStats');
@@ -96,6 +97,7 @@ function render(clientStats, serverStats, renderProps, store) {
 
     const head = Helmet.rewind();
     const moduleIds = Loadable.flushModuleIds();
+    console.log(moduleIds);
 
     const js = getJsFromStats(clientStats);
     const css = getCssFromStats(clientStats);
