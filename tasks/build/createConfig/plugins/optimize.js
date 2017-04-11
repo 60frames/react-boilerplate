@@ -26,6 +26,11 @@ module.exports = ({ optimize, sourceMap }) =>
               // https://github.com/facebook/react/issues/9245
               new webpack.DefinePlugin({
                   'process.env.NODE_ENV': JSON.stringify('production')
-              })
+              }),
+              // Deterministic module ids for long term caching
+              new webpack.HashedModuleIdsPlugin()
           ]
-        : [];
+        : [
+              // Deterministic, readable module ids
+              new webpack.NamedModulesPlugin()
+          ];
