@@ -140,18 +140,26 @@ Object {
         "disable": true,
       },
     },
-    StatsPlugin {
-      "cache": Object {},
-      "options": Object {
-        "chunkModules": true,
-      },
-      "output": "stats.json",
+    NamedModulesPlugin {
+      "options": Object {},
     },
     HotModuleReplacementPlugin {
       "fullBuildTimeout": 200,
       "multiStep": undefined,
     },
     NoEmitOnErrorsPlugin {},
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": undefined,
+      "chunkNames": Array [
+        "bootstrap",
+      ],
+      "filenameTemplate": "[name].js",
+      "ident": "<rootDir>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js0",
+      "minChunks": Infinity,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
   ],
   "resolve": Object {
     "modules": Array [
@@ -263,6 +271,9 @@ Object {
         "allChunks": true,
         "disable": true,
       },
+    },
+    NamedModulesPlugin {
+      "options": Object {},
     },
     LimitChunkCountPlugin {
       "options": Object {

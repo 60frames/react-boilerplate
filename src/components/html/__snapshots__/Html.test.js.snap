@@ -66,7 +66,11 @@ exports[`components/html/Html renders correctly 1`] = `
     />
     &lt;link /&gt;
     <link
-      href="https://60fram.es/bundle.css"
+      href="/bundle.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/chunk.css"
       rel="stylesheet"
     />
   </head>
@@ -98,7 +102,10 @@ exports[`components/html/Html renders correctly 1`] = `
       }
     />
     <script
-      src="https://60fram.es/bundle.js"
+      src="/bundle.js"
+    />
+    <script
+      src="/chunk.js"
     />
   </body>
 </html>

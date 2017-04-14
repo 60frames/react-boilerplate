@@ -4,9 +4,11 @@ exports[`components/index/Index renders a loading indicator 1`] = `
 <div
   className="root"
 >
-  <p>
+  <div
+    className="root"
+  >
     Loading...
-  </p>
+  </div>
 </div>
 `;
 
@@ -24,9 +26,10 @@ exports[`components/index/Index renders an error 1`] = `
 <div
   className="root"
 >
-  <p>
-    Error... 
+  <div
+    className="root"
+  >
     An error
-  </p>
+  </div>
 </div>
 `;

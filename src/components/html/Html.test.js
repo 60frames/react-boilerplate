@@ -11,8 +11,14 @@ describe('components/html/Html', () => {
         process.env.REDUX_LOGGER = 'true';
         const component = renderer.create(
             <Html
-                css="https://60fram.es/bundle.css"
-                js="https://60fram.es/bundle.js"
+                css={[
+                    'bundle.css',
+                    'chunk.css'
+                ]}
+                js={[
+                    'bundle.js',
+                    'chunk.js'
+                ]}
                 html={`
                     <div id="root">
                         Hello World.

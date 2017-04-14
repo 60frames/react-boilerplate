@@ -6,8 +6,8 @@ module.exports = [
     createConfig({
         name: 'client',
         sourceMap: 'eval',
-        stats: true,
         hot: true,
+        bootstrapChunk: true,
         // TODO: Remove the need for `publicPath` once the style / css loader
         // has landed a better fix for relative image references from
         // sourcemapped css.

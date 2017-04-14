@@ -157,12 +157,31 @@ Object {
         "process.env.NODE_ENV": "\\"production\\"",
       },
     },
+    HashedModuleIdsPlugin {
+      "options": Object {
+        "hashDigest": "base64",
+        "hashDigestLength": 4,
+        "hashFunction": "md5",
+      },
+    },
     StatsPlugin {
       "cache": Object {},
       "options": Object {
         "chunkModules": true,
       },
-      "output": "stats.json",
+      "output": "client-stats.json",
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": undefined,
+      "chunkNames": Array [
+        "bootstrap",
+      ],
+      "filenameTemplate": "[name].[chunkhash].js",
+      "ident": "<rootDir>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js0",
+      "minChunks": Infinity,
+      "minSize": undefined,
+      "selectedChunks": undefined,
     },
   ],
   "resolve": Object {
@@ -295,6 +314,13 @@ Object {
     DefinePlugin {
       "definitions": Object {
         "process.env.NODE_ENV": "\\"production\\"",
+      },
+    },
+    HashedModuleIdsPlugin {
+      "options": Object {
+        "hashDigest": "base64",
+        "hashDigestLength": 4,
+        "hashFunction": "md5",
       },
     },
     LimitChunkCountPlugin {

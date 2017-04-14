@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const webpack = require('webpack');
 const javascript = require('./rules/javascript');
 const { css, cssModules } = require('./rules/css');
 const fonts = require('./rules/fonts');
@@ -13,6 +14,7 @@ const optimize = require('./plugins/optimize');
 const stats = require('./plugins/stats');
 const hmr = require('./plugins/hmr');
 const codeSplitting = require('./plugins/codeSplitting');
+const bootstrapChunk = require('./plugins/bootstrapChunk');
 
 const SRC_DIR = path.join(__dirname, '../../../src');
 const DIST_DIR = path.join(__dirname, '../../../dist');
@@ -27,6 +29,7 @@ const DEFAULTS = {
     extractCss: false,
     stats: false,
     codeSplitting: true,
+    bootstrapChunk: false,
     publicPath: ''
 };
 
@@ -41,6 +44,7 @@ const DEFAULTS = {
  * @param {boolean}         options.extractCss     Extract CSS into external file.
  * @param {boolean}         options.stats          Output build stats.
  * @param {boolean}         options.codeSplitting  Disable split points by limiting max chunks to 1.
+ * @param {boolean}         options.bootstrapChunk Pull Webpack bootstrap code into own chunk.
  * @param {string}          options.publicPath     The public path.
  */
 module.exports = options => {
@@ -92,14 +96,20 @@ module.exports = options => {
             ...optimize(options),
             ...stats(options),
             ...hmr(options),
-            ...codeSplitting(options)
+            ...codeSplitting(options),
+            ...bootstrapChunk(options)
         ],
         devtool: sourceMap ? sourceMap : '',
         target: node ? 'node' : 'web',
         externals: node
             ? fs
                   .readdirSync('node_modules')
-                  .filter(x => !x.includes('.bin'))
+                  .filter(
+                      // Bundle react-loadable to avoid having to define
+                      // `serverSideRequirePath` as well as `webpackRequireWeakId`
+                      // in Loadable HoCs.
+                      x => !x.includes('.bin') && !x.includes('react-loadable')
+                  )
                   .reduce(
                       (externals, mod) => {
                           externals[mod] = `commonjs ${mod}`;

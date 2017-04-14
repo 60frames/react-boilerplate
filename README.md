@@ -16,7 +16,7 @@ $ npm start
 ## Features
 
 - ES2015/16 with [Babel](https://github.com/babel/babel)
-- Universal rendering with support for data fetching
+- Universal rendering with support for data fetching *and code splitting*.
 - Hot reloading on both client and *server*
 - Locally scoped CSS with [CSS modules](https://github.com/css-modules)
 - Scalable unit testing via [Jest](https://github.com/facebook/jest)

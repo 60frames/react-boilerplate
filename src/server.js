@@ -1,4 +1,5 @@
 import React from 'react';
+import { compose } from 'redux';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -7,11 +8,25 @@ import Helmet from 'react-helmet';
 import configureStore from 'store/configureStore';
 import routes, { NotFoundComponent } from 'routes';
 import Html from 'components/html/Html';
+import Loadable from 'components/lib/loadable/loadable';
+
+function flatten(arr) {
+    return [].concat.apply([], arr);
+}
+
+function uniq(arr) {
+    return [...new Set(arr)];
+}
+
+function isTruthy(val) {
+    return !!val;
+}
+
+const flattenUniq = compose(uniq, flatten);
 
 function fetchComponentData(renderProps, store) {
     const requests = renderProps.components
-        // filter undefined values
-        .filter(component => component)
+        .filter(isTruthy)
         .map(component => {
             // Handle `connect`ed components.
             if (component.WrappedComponent) {
@@ -38,44 +53,77 @@ function isNotFound(renderProps) {
         .some(component => component === NotFoundComponent);
 }
 
-function getJsFromStats(stats) {
-    let assets = stats.assetsByChunkName.client;
+function getJsByChunkName(name, { assetsByChunkName }) {
+    let assets = assetsByChunkName[name];
     if (!Array.isArray(assets)) {
         assets = [assets];
     }
     return assets.find(asset => /\.js$/.test(asset));
 }
 
-function getCssFromStats(stats) {
-    let assets = stats.assetsByChunkName.client;
+function getJsByModuleIds(moduleIds, {
+    modulesById,
+    chunksById
+}) {
+    const chunkIds = flatten(moduleIds.map(id => {
+        const clientModule = modulesById[id];
+        if (!clientModule) {
+            throw new Error(`${id} not found in client stats`);
+        }
+        return clientModule.chunks;
+    }));
+    return flattenUniq(
+        chunkIds.map(id => {
+            return chunksById[id].files
+                .filter(file => /\.js$/.test(file))
+                .filter(file => !/\.hot-update\.js$/.test(file));
+        })
+    );
+}
+
+function getCssByChunkName(name, { assetsByChunkName }) {
+    let assets = assetsByChunkName[name];
     if (!Array.isArray(assets)) {
         assets = [assets];
     }
     return assets.find(asset => /\.css$/.test(asset));
 }
 
-function render(stats, renderProps, store) {
-    const js = getJsFromStats(stats);
-    const css = getCssFromStats(stats);
+function getJs(moduleIds, stats) {
+    return [
+        getJsByChunkName('bootstrap', stats),
+        ...getJsByModuleIds(moduleIds, stats),
+        getJsByChunkName('client', stats),
+    ].filter(isTruthy);
+}
 
+function getCss(stats) {
+    return [
+        getCssByChunkName('client', stats)
+    ].filter(isTruthy);
+}
+
+function render(renderProps, store, stats) {
     const markup = renderToString(
         <Provider store={store}>
             <RouterContext {...renderProps} />
         </Provider>
     );
-
     const head = Helmet.rewind();
+    const moduleIds = Loadable.flushModuleIds();
+    const js = getJs(moduleIds, stats);
+    const css = getCss(stats);
+    const initialState = store.getState();
 
-    const html = renderToStaticMarkup(
+    return renderToStaticMarkup(
         <Html
-            js={js && `/${js}`}
-            css={css && `/${css}`}
+            js={js}
+            css={css}
             html={markup}
             head={head}
-            initialState={store.getState()} />
+            initialState={initialState}
+        />
     );
-
-    return html;
 }
 
 /**
@@ -83,7 +131,17 @@ function render(stats, renderProps, store) {
  * @param  {object}     stats Webpack stats output
  * @return {function}   middleware function
  */
-export default stats => {
+export default (stats) => {
+    // Build stats maps for quicker lookups.
+    const modulesById = stats.modules.reduce((modules, mod) => {
+        modules[mod.id] = mod;
+        return modules;
+    }, {});
+    const chunksById = stats.chunks.reduce((chunks, chunk) => {
+        chunks[chunk.id] = chunk;
+        return chunks;
+    }, {});
+    const assetsByChunkName = stats.assetsByChunkName;
 
     /**
      * @param  {object}     req Express request object
@@ -110,7 +168,11 @@ export default stats => {
                     .then(() => {
                         let html;
                         try {
-                            html = render(stats, renderProps, store);
+                            html = render(renderProps, store, {
+                                modulesById,
+                                chunksById,
+                                assetsByChunkName
+                            });
                         } catch (ex) {
                             return next(ex);
                         }
