@@ -6,30 +6,30 @@ const ms = require('ms');
 
 const DIST_DIR = path.join(__dirname, '../../dist');
 const SERVER_RENDERER_PATH = path.join(DIST_DIR, 'server.js');
-const CLIENT_STATS_PATH = path.join(DIST_DIR, 'client-stats.json');
 const SERVER_STATS_PATH = path.join(DIST_DIR, 'server-stats.json');
+const CLIENT_STATS_PATH = path.join(DIST_DIR, 'client-stats.json');
 const router = express.Router();
 
 let serverRenderer;
-let clientStats;
 let serverStats;
+let clientStats;
 
 try {
     serverRenderer = require(SERVER_RENDERER_PATH).default;
 } catch (ex) {
-    throw new Error('Server bundle not found. Try running `npm run build`');
-}
-
-try {
-    clientStats = require(CLIENT_STATS_PATH);
-} catch (ex) {
-    throw new Error('Client bundle client-stats.json not found. Try running `npm run build`');
+    throw new Error(`Server bundle not found at ${SERVER_RENDERER_PATH}. Try running \`npm run build\``);
 }
 
 try {
     serverStats = require(SERVER_STATS_PATH);
 } catch (ex) {
-    throw new Error('Client bundle server-stats.json not found. Try running `npm run build`');
+    throw new Error(`Server stats not found at ${SERVER_STATS_PATH}. Try running \`npm run build\``);
+}
+
+try {
+    clientStats = require(CLIENT_STATS_PATH);
+} catch (ex) {
+    throw new Error(`Client stats not found at ${CLIENT_STATS_PATH}. Try running \`npm run build\``);
 }
 
 router.use(express.static(DIST_DIR, {
