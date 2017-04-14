@@ -107,11 +107,12 @@ function getCss(stats) {
 }
 
 function render(renderProps, store, stats) {
-    const markup = renderToString(
-        <Provider store={store}>
-            <RouterContext {...renderProps} />
-        </Provider>
-    );
+    // const markup = renderToString(
+    //     <Provider store={store}>
+    //         <RouterContext {...renderProps} />
+    //     </Provider>
+    // );
+    const markup = '';
     const head = Helmet.rewind();
     const moduleIds = Loadable.flushModuleIds();
     const js = getJs(stats, moduleIds);

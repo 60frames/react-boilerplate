@@ -1,10 +1,18 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import quote from 'reducers/quote/quote';
+// import quote from 'reducers/quote/quote';
 
-const rootReducer = combineReducers({
-    quote,
-    routing: routerReducer
-});
+const createRootReducer = extraReducers => {
+    return combineReducers({
+        // quote,
+        routing: routerReducer,
+        ...extraReducers
+    });
+};
 
-export default rootReducer;
+// const rootReducer = combineReducers({
+//     quote,
+//     routing: routerReducer
+// });
+
+export default createRootReducer;
