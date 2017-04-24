@@ -1,5 +1,4 @@
-/* global jest */
-/* eslint-env node */
+/* eslint-env jest, commonjs */
 
 const ReactRouter = jest.genMockFromModule('react-router');
 ReactRouter.Router = 'Router';

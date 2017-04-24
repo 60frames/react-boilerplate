@@ -1,10 +1,16 @@
 {
-    "extends": "./node_modules/60frames-coding-standards/.eslintrc-node",
+    "parser": "babel-eslint",
+    "extends": "eslint:recommended",
     "env": {
-    	"es6": true
+        "es6": true,
+        "node": true
     },
+    "plugins": [
+        "prettier"
+    ],
     "rules": {
-        "valid-jsdoc": 0,
-        "no-process-env": 0
+        "prettier/prettier": ["error", {
+            "singleQuote": true
+        }]
     }
 }

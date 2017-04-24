@@ -13,21 +13,31 @@ let serverRenderer;
 let stats;
 
 try {
-    serverRenderer = require(SERVER_RENDERER_PATH).default;
+  serverRenderer = require(SERVER_RENDERER_PATH).default;
 } catch (ex) {
-    throw new Error(`Server bundle not found at ${SERVER_RENDERER_PATH}. Try running \`npm run build\``);
+  throw new Error(
+    `Server bundle not found at ${SERVER_RENDERER_PATH}. Try running \`npm run build\``
+  );
 }
 
 try {
-    stats = require(STATS_PATH);
+  stats = require(STATS_PATH);
 } catch (ex) {
-    throw new Error(`Client stats not found at ${STATS_PATH}. Try running \`npm run build\``);
+  throw new Error(
+    `Client stats not found at ${STATS_PATH}. Try running \`npm run build\``
+  );
 }
 
-router.use(express.static(DIST_DIR, {
+router.use(
+  express.static(DIST_DIR, {
     maxAge: ms(process.env.BROWSER_CACHE || 0)
-}));
+  })
+);
 
-router.use(serverRenderer(stats));
+router.use(
+  serverRenderer({
+    clientStats: stats
+  })
+);
 
 module.exports = router;

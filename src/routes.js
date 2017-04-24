@@ -5,11 +5,11 @@ import IndexLoadable from 'components/index/IndexLoadable';
 import NotFound from 'components/notfound/NotFound';
 
 export default (
-    <Route path="/" component={App}>
-        <IndexRoute component={IndexLoadable} />
-        <Redirect from="foo" to="/" />
-        <Route path="*" component={NotFound} />
-    </Route>
+  <Route path="/" component={App}>
+    <IndexRoute component={IndexLoadable} />
+    <Redirect from="foo" to="/" />
+    <Route path="*" component={NotFound} />
+  </Route>
 );
 
 export { NotFound as NotFoundComponent };

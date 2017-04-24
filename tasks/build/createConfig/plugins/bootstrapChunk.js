@@ -7,12 +7,12 @@ const webpack = require('webpack');
  * loaded *before* main.
  */
 module.exports = ({ bootstrapChunk, revision }) =>
-    bootstrapChunk
-        ? [
-              new webpack.optimize.CommonsChunkPlugin({
-                  name: 'bootstrap',
-                  filename: revision ? '[name].[chunkhash].js' : '[name].js',
-                  minChunks: Infinity
-              })
-          ]
-        : [];
+  (bootstrapChunk
+    ? [
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'bootstrap',
+          filename: revision ? '[name].[chunkhash].js' : '[name].js',
+          minChunks: Infinity
+        })
+      ]
+    : []);

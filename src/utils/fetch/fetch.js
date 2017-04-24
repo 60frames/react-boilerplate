@@ -2,33 +2,34 @@ import isomorphicFetch from 'isomorphic-fetch';
 import NetworkError from 'utils/networkerror/NetworkError';
 
 function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return response;
-    }
-    throw response;
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
+  throw response;
 }
 
 function parseSuccess(response) {
-    if (response.status === 201 || response.status === 204) {
-        return {};
-    }
-    return response.json()
-        .catch(() => {
-            throw new NetworkError('Invalid JSON Response', response.status);
-        });
+  if (response.status === 201 || response.status === 204) {
+    return {};
+  }
+  return response.json().catch(() => {
+    throw new NetworkError('Invalid JSON Response', response.status);
+  });
 }
 
 function parseError(response) {
-    if (response && typeof response.json === 'function') {
-        return response.json()
-            .then(json => {
-                throw new NetworkError(response.statusText, response.status, json);
-            }, () => {
-                throw new NetworkError(response.statusText, response.status);
-            });
-    }
-    // Network errors, e.g. cors / offline etc.
-    throw new NetworkError(response.message);
+  if (response && typeof response.json === 'function') {
+    return response.json().then(
+      json => {
+        throw new NetworkError(response.statusText, response.status, json);
+      },
+      () => {
+        throw new NetworkError(response.statusText, response.status);
+      }
+    );
+  }
+  // Network errors, e.g. cors / offline etc.
+  throw new NetworkError(response.message);
 }
 
 /**
@@ -49,16 +50,19 @@ function parseError(response) {
  * @return {Promise}
  */
 function fetch(url, options = {}) {
-    options = Object.assign({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    }, options);
+  options = Object.assign(
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    },
+    options
+  );
 
-    return isomorphicFetch(url, options)
-        .then(checkStatus)
-        .then(parseSuccess, parseError);
+  return isomorphicFetch(url, options)
+    .then(checkStatus)
+    .then(parseSuccess, parseError);
 }
 
 export default fetch;

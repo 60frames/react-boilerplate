@@ -3,8 +3,8 @@ import { routerReducer } from 'react-router-redux';
 import quote from 'reducers/quote/quote';
 
 const rootReducer = combineReducers({
-    quote,
-    routing: routerReducer
+  quote,
+  routing: routerReducer
 });
 
 export default rootReducer;

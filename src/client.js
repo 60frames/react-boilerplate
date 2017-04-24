@@ -12,22 +12,22 @@ const store = configureStore(window.__INITIAL_STATE__);
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(
-    <AppContainer>
-        <Root store={store} history={history} />
-    </AppContainer>,
-    document.getElementById('root')
+  <AppContainer>
+    <Root store={store} history={history} />
+  </AppContainer>,
+  document.getElementById('root')
 );
 
 /* eslint-disable */
 if (module.hot) {
-    module.hot.accept('components/root/Root', () => {
-        const NextRoot = require('components/root/Root').default;
-        render(
-            <AppContainer>
-                <NextRoot store={store} history={history} />
-            </AppContainer>,
-            document.getElementById('root')
-        );
-    });
+  module.hot.accept('components/root/Root', () => {
+    const NextRoot = require('components/root/Root').default;
+    render(
+      <AppContainer>
+        <NextRoot store={store} history={history} />
+      </AppContainer>,
+      document.getElementById('root')
+    );
+  });
 }
 /* eslint-enable */

@@ -1,14 +1,16 @@
 {
-    "extends": "./../node_modules/60frames-coding-standards/.eslintrc-react",
+    "extends": "plugin:react/recommended",
     "env": {
-        "node": false
+        "browser": true,
+        "node": false,
+        "commonjs": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
     },
     "globals": {
-        "process": false
-    },
-    "rules": {
-        "valid-jsdoc": 0,
-        "no-process-env": 0,
-        "object-curly-spacing": [2, "always"]
+        "process": false,
+        "__webpack_modules__": false,
+        "__webpack_require__": false
     }
 }

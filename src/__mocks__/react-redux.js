@@ -1,4 +1,4 @@
-/* eslint-env node */
+/* eslint-env commonjs */
 
 const ReactRedux = require.requireActual('react-redux');
 ReactRedux.Provider = 'Provider';
