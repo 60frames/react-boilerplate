@@ -2,6 +2,9 @@
   "name": "react-boilerplate",
   "version": "1.0.0",
   "description": "Production-ready boilerplate for building universal web apps with React and Redux",
+  "engines": {
+    "node": "7.2.0"
+  },
   "scripts": {
     "start": "npm run serve",
     "serve": "node -r ./server/environment ./server",
@@ -9,7 +12,8 @@
     "test": "jest --coverage",
     "lint": "eslint .",
     "format": "eslint . --fix",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
