@@ -31,7 +31,7 @@ Index.fetchData = function({ dispatch }) {
 Index.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   value: PropTypes.string
 };
 

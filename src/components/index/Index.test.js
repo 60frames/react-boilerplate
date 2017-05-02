@@ -7,7 +7,12 @@ import { Index } from 'components/index/Index';
 describe('components/index/Index', () => {
   it('renders a quote', () => {
     const component = renderer.create(
-      <Index value="A quote" dispatch={jest.fn()} isFetching={false} />
+      <Index
+        value="A quote"
+        dispatch={jest.fn()}
+        isFetching={false}
+        error={false}
+      />
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -15,7 +20,7 @@ describe('components/index/Index', () => {
 
   it('renders a loading indicator', () => {
     const component = renderer.create(
-      <Index isFetching dispatch={jest.fn()} />
+      <Index isFetching dispatch={jest.fn()} error={false} />
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
