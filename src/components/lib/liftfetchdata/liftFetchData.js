@@ -3,7 +3,6 @@
  * circumventing static require / import to prevent Webpack from bundling the
  * weakId component and it's deps.
  */
-
 export default webpackRequireWeakId => Component => {
   const weakId = webpackRequireWeakId();
   if (__webpack_modules__[weakId]) {

@@ -5,10 +5,10 @@ import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import Helmet from 'react-helmet';
+import { flushWebpackRequireWeakIds } from 'react-loadable';
 import configureStore from 'store/configureStore';
 import routes, { NotFoundComponent } from 'routes';
 import Html from 'components/html/Html';
-import Loadable from 'components/lib/loadable/loadable';
 
 function flatten(arr) {
   return [].concat.apply([], arr);
@@ -110,7 +110,7 @@ function render(renderProps, store, stats) {
     </Provider>
   );
   const head = Helmet.rewind();
-  const moduleIds = Loadable.flushModuleIds();
+  const moduleIds = flushWebpackRequireWeakIds();
   const js = getJs(moduleIds, stats);
   const css = getCss(stats);
   const initialState = store.getState();
