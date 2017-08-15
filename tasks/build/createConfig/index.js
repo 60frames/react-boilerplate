@@ -65,7 +65,8 @@ module.exports = options => {
     },
     output: {
       path: DIST_DIR,
-      filename: revision ? '[name].[chunkhash].js' : '[name].js',
+      filename: revision ? '[name].js' : '[name].js',
+      chunkFilename: revision ? '[name].js' : '[name].js',
       libraryTarget: node ? 'commonjs2' : 'var',
       publicPath
     },

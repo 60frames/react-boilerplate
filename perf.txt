@@ -1,0 +1,15 @@
+No Prefetch:
+First meaningful paint 1,390 ms
+First Interactive (beta) 2,770 ms
+
+Prefetch: queued at 740ms
+First meaningful paint 1,430 ms
+First Interactive (beta) 2,940 ms
+
+componentDidMoutn import:
+First meaningful paint 1,420 ms
+First Interactive (beta) 4,540 ms
+
+componentDidMount inject prefetch links: <-- this has no impact.... queued ~2.00s
+First meaningful paint 1,360 ms
+First Interactive (beta) 2,770 ms

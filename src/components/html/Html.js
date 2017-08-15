@@ -7,6 +7,30 @@ function Html({ js, css, html, head, initialState }) {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
+        <link
+          rel="prefetch"
+          as="script"
+          type="application/javascript"
+          href="/react-bootstrap.js"
+        />
+        <link
+          rel="prefetch"
+          as="script"
+          type="application/javascript"
+          href="/lodash.js"
+        />
+        <link
+          rel="prefetch"
+          as="script"
+          type="application/javascript"
+          href="/moment.js"
+        />
+        <link
+          rel="prefetch"
+          as="script"
+          type="application/javascript"
+          href="/jquery.js"
+        />
         <meta httpEquiv="x-ua-compatible" content="ie=edge,chrome=1" />
         {head.title.toComponent()}
         {head.meta.toComponent()}
@@ -16,7 +40,6 @@ function Html({ js, css, html, head, initialState }) {
         />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="msapplication-tap-highlight" content="no" />
-
         <link
           rel="apple-touch-icon"
           sizes="180x180"

@@ -29,7 +29,7 @@ LoadingComponent.propTypes = {
 const enhance = compose(LiftFetchData(webpackRequireWeakId), Loadable);
 
 export default enhance({
-  loader: () => import('./Index'),
+  loader: () => import(/* webpackChunkName: "index" */ './Index'),
   LoadingComponent,
   webpackRequireWeakId
 });
